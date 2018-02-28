@@ -1,0 +1,24 @@
+.form-area{
+    margin: auto;
+    padding: 10px;
+    height: 50%;
+    width: 70%;
+}
+
+.btn{
+  width: 200px;
+}
+
+.container{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.row{
+    /* display: table-cell; */
+    vertical-align: middle;
+}
+
+.form-area{
+  text-align: left;

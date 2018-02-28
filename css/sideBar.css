@@ -1,0 +1,9 @@
+.wrapper {
+    display: flex;
+    align-items: stretch;
+    text-align: left;
+}
+
+#sidebar {
+    padding-left: 50px;
+}
