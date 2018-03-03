@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  include 'navbar.php';
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,28 +15,48 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="home.php">PetCare</a>
-        </div>
-        <ul class="nav navbar-right">
-          <li class="navigation_bar_list"><a href="searchPage.php">Search Services</a></li>
-          <li class="navigation_bar_list"><a href="signup.php">Sign up</a></li>
-        </ul>
-      </div>
-    </nav>
-    <div class="row">
-      <div class="searchbar col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <div class="filter_box">
+      <?php
+        $db = pg_connect("host=localhost port=5433 dbname=cs2102 user=postgres password=darrylimJy1995");
+        if (!$db) {
+          die('Connection failed.??');
+        }
+        $q = "SELECT * FROM service";
 
-        </div>
-      </div>
-      <div class="content col-xs-8 col-sm-8 col-md-8 col-lg-8">
-        <div class="loop_box">
+        $result = pg_query($db,$q);
 
-        </div>
-      </div>
-  </div>
+        //print_r(pg_fetch_array($result));
+        while ($row = pg_fetch_array($result)) {
+            echo "Title: " . $row['servicetitle'] . "<br>";
+            echo "Date range: ";
+            echo $row['servicestart'];
+            echo " - ";
+            echo $row['serviceend'];
+            echo "<br>";
+            echo "Cost/night: " . $row['price'] . "<br>";
+            echo "Maximum number of pets: " . $row['max']  . "<br>";
+            echo "Id: " . $row['serviceid'];
+            echo nl2br("<br><br>");
+        }
+       ?>
+
+       <form name="apply" action="applyForService.php" method="POST">
+         <div class="form-group">
+          <label for="id">Select Sitter ID to apply for:  </label>
+          <select class="form-control input-small" id="id" name='id'>
+            <?php
+              $db = pg_connect("host=localhost port=5433 dbname=cs2102 user=postgres password=darrylimJy1995");
+              if (!$db) {
+                die('Connection failed.??');
+              }
+              $q = "SELECT * FROM service";
+              $result = pg_query($db,$q);
+              while ($row = pg_fetch_array($result)) {
+                  echo "<option value='" . $row['serviceid'] . "'>" . $row['serviceid'] . "</option>";
+              }
+             ?>
+         </select>
+         </div>
+         <input type='submit' name='submit' value='Apply for service' class='btn'/>
+       </form>
   </body>
 </html>

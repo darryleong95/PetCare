@@ -1,3 +1,7 @@
+<?php
+  session_start();
+  include 'navbar.php';
+?>
 <!DOCTYPE html>
 <html>
 <header>
@@ -13,27 +17,16 @@
 
 </header>
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="home.php">PetCare</a>
-      </div>
-      <ul class="nav navbar-right">
-        <li class="navigation_bar_list"><a href="#">Search Services</a></li>
-        <li class="navigation_bar_list"><a href="signup.php">Sign up</a></li>
-      </ul>
-    </div>
-  </nav>
   <div class="form-area">
     <div class="header">
-      <h2>Sign up form</h2>
+      <h2>Log in here (Pet Sitter)</h2>
     </div>
-    <form name="signup_form" class="suForm form-horizontal form_font" method="POST" action="" onsubmit="return Validate()">
+    <form name="login_form" class="suForm form-horizontal form_font" method="POST" action="login_post_ps.php" onsubmit="return Validate()">
       <div class="form-group">
-        <label class="control-label col-xs-3" for="username">Username:</label>
-        <div class="col-xs-8" id="user_div">
-          <input class="form-control" id="username" type="text" name="username" placeholder="Enter username (required)" value=""/>
-          <div id="user_err"></div>
+        <label class="control-label col-xs-3" for="email">Email:</label>
+        <div class="col-xs-8" id="email_div">
+          <input class="form-control" id="email" type="text" name="email" placeholder="Enter Email (required)" value=""/>
+          <div id="email_err"></div>
         </div>
       </div>
       <div class="form-group">
@@ -45,7 +38,7 @@
       </div>
       <div class="sign_up_submit">
         <center>
-          <input type="submit" name="register" value="Login" class="btn"/>
+          <input type="submit" name="submit" value="Login" class="btn"/>
         </center>
       </div>
     </form>
@@ -53,22 +46,22 @@
 </body>
 </html>
 <script type="text/javascript">
-  var username = document.forms['signup_form']['username'];
-  var password = document.forms['signup_form']['password'];
+  var email = document.forms['login_form']['email'];
+  var password = document.forms['login_form']['password'];
 
-  var user_err = document.getElementById("user_err");
+  var email_err = document.getElementById("email_err");
   var pass_err = document.getElementById("pass_err");
 
-  username.addEventListener('blur', userVerify, true);
+  email.addEventListener('blur', emailVerify, true);
   password.addEventListener('blur', passVerify, true);
 
   function Validate() {
    //validate username
-   if (username.value.trim() == "") {
-     username.style.border = "1px solid red";
-     document.getElementById('user_div').style.color = "red";
-     user_err.textContent = "Username is required";
-     username.focus();
+   if (email.value.trim() == "") {
+     email.style.border = "1px solid red";
+     document.getElementById('email_div').style.color = "red";
+     email_err.textContent = "Email is required";
+     email.focus();
      return false;
    }
    //validate password
@@ -81,11 +74,11 @@
    }
   }
 
-  function userVerify() {
-   if (username.value.trim() != "") {
-    username.style.border = "1px solid #5e6e66";
-    document.getElementById('user_div').style.color = "#5e6e66";
-    user_err.innerHTML = "";
+  function emailVerify() {
+   if (email.value.trim() != "") {
+    email.style.border = "1px solid #5e6e66";
+    document.getElementById('email_div').style.color = "#5e6e66";
+    email_err.innerHTML = "";
     return true;
    }
   }

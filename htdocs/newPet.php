@@ -1,10 +1,12 @@
+<?php
+  session_start();
+  include 'navbar.php';
+?>
 <!DOCTYPE html>
 <html>
 <header>
   <title>New Pet</title>
-
   <meta charset="utf-8">
-
   <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/sideBar.css">
   <link rel="stylesheet" href="css/navbar.css">
@@ -12,43 +14,17 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </header>
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="home.php">PetCare</a>
-      </div>
-      <ul class="nav navbar-right">
-        <li class="navigation_bar_list"><a href="searchPage.php">Search Services</a></li>
-        <li class="navigation_bar_list"><a href="#">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
   <div class="container">
     <div class="row">
       <div class="col-sm-3">
-        <div class="wrapper">
-          <nav id="sidebar">
-              <!-- Sidebar Header -->
-              <div class="sidebar-header">
-                  <h3>User menu</h3>
-              </div>
-              <!-- Sidebar Links -->
-              <ul class="list-unstyled components">
-                  <li><a href="profile.php">Profile</a></li>
-                  <li class="active"><a href="#">New Pet</a></li>
-                  <li><a href="newService.php">New Service</a></li>
-                  <li><a href="listedServices.php">Listed Service</a></li>
-                  <li><a href="listedPets.php">View Pets</a></li>
-              </ul>
-          </nav>
-        </div>
+        <?php include 'sidebar_po.php' ?>
       </div>
       <div class="col-sm-9">
         <div class="form-area">
           <div class="header">
             <h2>Add a Pet!</h2>
           </div>
-            <form name="pet_form" class="suForm form-horizontal form_font" method="POST" action="" onsubmit="return Validate()">
+            <form name="pet_form" class="suForm form-horizontal form_font" method="POST" action="newPet_post.php" onsubmit="return Validate()">
               <div class="form-group">
                 <label class="control-label col-xs-3" for="petName">Pet name:</label>
                 <div class="col-xs-8" id="petName_div">
@@ -63,6 +39,8 @@
                   <div id="dob_err"></div>
                 </div>
               </div>
+              <label class="radio-inline"><input type="radio" name="gender" checked/>Male</label>
+              <label class="radio-inline"><input type="radio" name="gender">Female</label>
               <div class="form-group">
                 <label class="control-label col-xs-3" for="breed">Breed:</label>
                 <div class="col-xs-8" id="breed_div">
@@ -73,12 +51,12 @@
               <div class="form-group">
                 <label class="control-label col-xs-3" for="additionalInfo">Additional Information:</label>
                 <div class="col-xs-8">
-                  <textarea class="form-control" rows = "3" id="addtionalInfo" name="addtionalInfo" placeholder="Anything potential service users might want to know! (Optional)"></textarea>
+                  <textarea class="form-control" rows = "3" id="additionalInfo" name="additionalInfo" placeholder="Anything potential service users might want to know! (Optional)"></textarea>
                 </div>
               </div>
               <div class="sign_up_submit">
                 <center>
-                  <input type="submit" name="register" value="Register my Pet!" class="btn"/>
+                  <input type="submit" name="submit" value="Register my Pet!" class="btn"/>
                 </center>
               </div>
             </form>
