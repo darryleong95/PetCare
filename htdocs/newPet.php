@@ -39,12 +39,27 @@
                   <div id="dob_err"></div>
                 </div>
               </div>
-              <label class="radio-inline"><input type="radio" name="gender" checked/>Male</label>
-              <label class="radio-inline"><input type="radio" name="gender">Female</label>
+              <div class="form-group">
+                <label class="control-label col-xs-3" for="gender">Gender :</label>
+                <select class="form-control input-small" id="gender" name="gender">
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-xs-3" for="type">Pet type:</label>
+                <select class="form-control input-small" id="type" name="type">
+                  <option value="Dog">Dog</option>
+                  <option value="Cat">Cat</option>
+                  <option value="Rabbit">Rabbit</option>
+                  <option value="Hamster">Hamster</option>
+                  <option value="Bird">Bird</option>
+                </select>
+              </div>
               <div class="form-group">
                 <label class="control-label col-xs-3" for="breed">Breed:</label>
                 <div class="col-xs-8" id="breed_div">
-                  <input class="form-control" id="breed" type="text" name="breed" placeholder="Enter breed (required)" value=""/>
+                  <input class="form-control" id="breed" type="text" name="breed" placeholder="Enter breed (required) Please fill 'unsure' if not certain" value=""/>
                   <div id="breed_err"></div>
                 </div>
               </div>

@@ -45,9 +45,11 @@
               else{
                 echo 'Gender: Female <br>';
               }
-              echo "Breed: ", $row['breed'], "<br>" ;
-              echo "Date of birth: ", $row['dob'], "<br>" ;
-              echo nl2br("Additional Info: " . $row['additionalInfo'] . "<br><br>") ;
+              echo "Pet Type: ", $row['pettype'], "<br>";
+              echo "Breed: ", $row['breed'], "<br>";
+              echo "Date of birth: ", $row['dob'], "<br>";
+              echo "Additional Info: ", $row['additionalInfo'];
+              echo nl2br("<br><br>") ;
           }
 
          ?>

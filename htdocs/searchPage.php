@@ -55,8 +55,8 @@
               }
              ?>
          </select>
-         </div>
-         <input type='submit' name='submit' value='Apply for service' class='btn'/>
-       </form>
+       </div>
+       <input type='submit' name='submit' value='Apply for service' class='btn'/>
+     </form>
   </body>
 </html>
