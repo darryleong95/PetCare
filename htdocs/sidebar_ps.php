@@ -10,6 +10,7 @@
                   <li><a href="profile_ps.php">Profile</a></li>
                   <li><a href="newService.php">New Service</a></li>
                   <li><a href="listedServices.php">Listed Service</a></li>
+                  <li><a href="receivedRequest.php">View Requests</a></li>
               </ul>
           </nav>
         </div>';

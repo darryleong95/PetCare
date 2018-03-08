@@ -13,9 +13,18 @@
 
       $email = $_SESSION["email"];
 
-      $allServices = pg_query($db, "SELECT * FROM service");
 
-      $numRow = pg_num_rows($allServices);
+      $allServices = pg_query($db, "SELECT serviceid FROM service s1 WHERE serviceid >= all(SELECT serviceid FROM service s2)");
+
+      if(pg_num_rows($allServices) != 0){
+        while($row = pg_fetch_array($allServices)){
+          $numRow = $row['serviceid'] + 1;
+        }
+      }
+      else{
+        $numRow = 0;
+      }
+
 
       $title = $_POST[title];
       $startDate = $_POST[startDate];
@@ -28,6 +37,16 @@
       $execute = pg_query($db,$q);
 
       if($execute){
+        $date = new DateTime($startDate);
+        $dateEnd = new DateTime($endDate);
+
+        //works
+        while ($date->format('Y-m-d') <= $dateEnd->format('Y-m-d')) {
+          $insertDate = $date->format('Y-m-d');
+          $q1 = "INSERT INTO service_dates(date_avail,sitter_email,serviceid) VALUES('$insertDate','$email','$numRow')";
+          $execute1 = pg_query($db,$q1);
+          $date->modify('+1 day');
+         }
         echo "<script>alert('Succesfully added a Service!')</script>";
         include('listedServices.php');
       }

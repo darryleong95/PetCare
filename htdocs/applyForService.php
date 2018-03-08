@@ -17,6 +17,7 @@
         $_SESSION['max']       = $row['max'];
         $_SESSION['price']     = $row['price'];
         $_SESSION['ps_email']  = $row['email'];
+        $_SESSION['serviceid'] = $row['serviceid'];
     }
   }
   else{
@@ -37,7 +38,7 @@
 </header>
 <body>
   <!--  1) Date range, 2) Pets involved, 3) Additional Queries-->
-  <form name="apply_form" class="suForm form-horizontal form_font" method="POST" action="" onsubmit="return Validate()">
+  <form name="apply_form" class="suForm form-horizontal form_font" method="POST" action="applyForService_post.php" onsubmit="return Validate()">
     <div class="form-group">
       <label class="control-label col-xs-4" for="startDate">Start Date:</label>
       <div id="startDate_div" class="col-xs-8">
