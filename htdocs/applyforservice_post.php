@@ -29,10 +29,12 @@
     $execute = pg_query($db,$q);
 
     if($execute){
-      echo "Success"; //re route to correct place
+      include('madeRequest.php'); //re route to correct place
     }
     else{
-      "Failure";
+      //thing of failure case?
+      echo "<script>alert('Unable to make a request, please try again.')</script>";
+      include('applyForService.php');
     }
     // while($row = pg_fetch_array($execute)) {
     //     $_SESSION['startDate'] = $row['servicestart'];

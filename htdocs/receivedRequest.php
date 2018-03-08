@@ -24,7 +24,7 @@
       </div>
       <div class="col-sm-9">
         <div class="header">
-          <h2>Request made</h2>
+          <h2>Request received</h2>
         </div>
         <br>
         <!--Loop listed pet results-->
@@ -47,9 +47,12 @@
               echo "Status            : ", $row['status'], "<br>";
               echo "Additional Info   : ", $row['message'];
               echo nl2br("<br><br>") ;
-              echo "<form></form>";
           }
          ?>
+         <form class="" action="acceptRequest.php" method="post">
+           Request Id to accept: <input size=3 type='text' id='id' name='id' />
+           <input type='submit' name='submit' value='Accept Request' class='btn'/>
+         </form>
       </div>
     </div>
   </div>

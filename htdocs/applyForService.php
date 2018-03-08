@@ -1,7 +1,5 @@
 <?php
-  session_start();
-?>
-<?php
+  include 'navbar.php';
   $db = pg_connect("host=localhost port=5433 dbname=cs2102 user=postgres password=darrylimJy1995");
   session_start();
   if (!$db) {
@@ -33,50 +31,123 @@
   <link rel="stylesheet" href="css/form.css">
   <link rel="stylesheet" href="css/sideBar.css">
   <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/applyservice.css">
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </header>
 <body>
-  <!--  1) Date range, 2) Pets involved, 3) Additional Queries-->
-  <form name="apply_form" class="suForm form-horizontal form_font" method="POST" action="applyForService_post.php" onsubmit="return Validate()">
-    <div class="form-group">
-      <label class="control-label col-xs-4" for="startDate">Start Date:</label>
-      <div id="startDate_div" class="col-xs-8">
-        <input size="21" type="date" id="startDate" name="startDate" value= '<?= $_SESSION['startDate']?>' />
-        <div id="startDate_err"></div>
+  <div class="wrapper">
+    <!--  1) Date range, 2) Pets involved, 3) Additional Queries-->
+    <form name="apply_form" class="suForm form-horizontal form_font" method="POST" action="applyForService_post.php" onsubmit="return Validate()">
+      <div class="form-group">
+        <label class="control-label col-xs-4" for="startDate">Start Date:</label>
+        <div id="startDate_div" class="col-xs-8">
+          <input size="21" type="date" id="startDate" name="startDate" value= '<?= $_SESSION['startDate']?>' />
+          <div id="startDate_err"></div>
+        </div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label col-xs-4" for="endDate">End Date:</label>
-      <div id="endDate_div" class="col-xs-8">
-        <input size="21" type="date" id="endDate" name="endDate" value= '<?= $_SESSION['endDate']?>' />
-        <div id="endDate_err"></div>
+      <div class="form-group">
+        <label class="control-label col-xs-4" for="endDate">End Date:</label>
+        <div id="endDate_div" class="col-xs-8">
+          <input size="21" type="date" id="endDate" name="endDate" value= '<?= $_SESSION['endDate']?>' />
+          <div id="endDate_err"></div>
+        </div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label col-xs-4" for="endDate">Bid: </label>
-      <div id="bid_div" class="col-xs-8">
-        <input type="number" id="bid" name="bid" placeholder="Place your bid here" value= '<?= $_SESSION['price']?>' step="0.01" />
-        <div id="bid_err"></div>
+      <div class="form-group">
+        <label class="control-label col-xs-4" for="endDate">Bid: </label>
+        <div id="bid_div" class="col-xs-8">
+          <input type="number" id="bid" name="bid" placeholder="Place your bid here" value= '<?= $_SESSION['price']?>' step="0.01" />
+          <div id="bid_err"></div>
+        </div>
       </div>
-    </div>
-
-    <div class="form-group">
-      <label class="control-label col-xs-3" for="additionalInfo">Additional Information:</label>
-      <div class="col-xs-8">
-        <textarea class="form-control" rows = "3" id="additionalInfo" name="additionalInfo" placeholder="How many pets do you have? Anything the sitter should know?"></textarea>
+      <div class="form-group">
+        <label class="control-label col-xs-3" for="additionalInfo">Additional Information:</label>
+        <div class="col-xs-8">
+          <textarea class="form-control" cols="100" rows = "3" id="additionalInfo" name="additionalInfo" placeholder="How many pets do you have? Anything the sitter should know?"></textarea>
+        </div>
       </div>
-    </div>
+        <!-- check whether there have been accepted reqeuests already -->
+        <?php
+          //check whether sitter has already accepted any requests
+          $q1 = "SELECT * FROM request WHERE serviceid = '$_POST[id]' AND status = 'accepted'";
+          $results = pg_query($db,$q1);
 
-    <div class="sign_up_submit">
-      <center>
-        <input type="submit" name="submit" value="Register my Pet!" class="btn"/>
-      </center>
-    </div>
+          //check whether pet owner has already made a request
+          $ownerEmail = $_SESSION["email"];
+          $q2 = "SELECT * FROM request WHERE serviceid = '$_POST[id]' AND owneremail = '$ownerEmail'";
+          $results2 = pg_query($db,$q2);
 
-  </form>
+          if(pg_num_rows($results2) != 0){
+            echo "<div class='form-group alert alert-warning'>
+                    <strong>You have already made a request for this Sitter.</strong>
+                  </div>
+                  <div class='form-group sign_up_submit'>
+                    <center>
+                      <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
+                    </center>
+                  </div>";
+          }
+          else{
+            if(pg_num_rows($results) == 0){
+              echo "<div class='form-group sign_up_submit'>
+                  <center>
+                    <input type='submit' name='submit' value='Register my Pet!' class='btn'/>
+                  </center>
+                </div>";
+            }
+            else{
+              while($row = pg_fetch_array($results)){
+                $start = $row['requeststart'];
+                $end   = $row['requestend'];
+                if($row['owneremail'] == $_SESSION[email]){
+                  echo "<div class='form-group alert alert-warning'>
+                    <strong>You have already made a request for this Sitter.</strong>
+                    </div>
+                    <div class='form-group sign_up_submit'>
+                      <center>
+                        <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
+                      </center>
+                    </div>
+                    ";
+                }
+                else if($_SESSION[email] == $row['sitteremail']){
+                  echo "<div class='form-group alert alert-warning'>
+                    <strong>You cannot register for you own service ._. What are you trying to do?</strong>
+                    </div>
+                    <div class='form-group sign_up_submit'>
+                      <center>
+                        <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
+                      </center>
+                    </div>
+                    ";
+                }
+                else if(!$_SESSION[email]){
+                  echo "<div class='form-group alert alert-warning'>
+                    <strong>You must be logged in to make a Request.</strong>
+                    </div>
+                    <div class='form-group sign_up_submit'>
+                      <center>
+                        <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
+                      </center>
+                    </div>
+                    ";
+                }
+                else{
+                  echo "<div class='form-group alert alert-warning'>
+                    <strong>*Please note that the sitter has already accepted a booking from $start to $end*</strong>
+                    </div>
+                    <div class='form-group sign_up_submit'>
+                      <center>
+                        <input type='submit' name='submit' value='Register my Pet!' class='btn'/>
+                      </center>
+                    </div>";
+                }
+              }
+            }
+          }
+         ?>
+    </form>
+  </div>
 </body>
 </html>
 <script type="text/javascript">

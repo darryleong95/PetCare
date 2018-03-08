@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>
   <body>
+    <div class="form-area">
       <div class="header">
         <h2>Sign up form (Pet Sitter)</h2>
       </div>
@@ -58,6 +59,7 @@
           </center>
         </div>
       </form>
+    </div>
   </body>
 </html>
 <script type="text/javascript">
