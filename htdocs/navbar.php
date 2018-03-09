@@ -31,22 +31,38 @@ if(isset($_SESSION['firstName']) && $_SESSION['email'] != "admin"){
             </div>
           </nav>';
   }
-
 }
 else{
-  echo '<nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-              <a class="navbar-brand" href="home.php">PetCare</a>
+  if($_SESSION['email'] == "admin"){
+    //admin logged in
+    echo '<nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="home.php">PetCare</a>
+              </div>
+              <ul class="nav navbar-right">
+                <li class="navigation_bar_list"><a href="searchPage.php">Search Services</a></li>
+                <li class="navigation_bar_list"><a href="adminPage.php">Admin profile</a></li>
+                <li class="navigation_bar_list"><a href="logout.php">Log out</a></li>
+              </ul>
             </div>
-            <ul class="nav navbar-right">
-              <li class="navigation_bar_list"><a href="searchPage.php">Search Services</a></li>
-              <li class="navigation_bar_list"><a href="signup_po.php">Sign up (Pet Owner)</a></li>
-              <li class="navigation_bar_list"><a href="signup_ps.php">Sign up (Pet Sitter)</a></li>
-              <li class="navigation_bar_list"><a href="login_po.php">Login (Pet Owner)</a></li>
-              <li class="navigation_bar_list"><a href="login_ps.php">Login (Pet Sitter)</a></li>
-            </ul>
-          </div>
-        </nav>';
+          </nav>';
+  }
+  else{
+    echo '<nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="home.php">PetCare</a>
+              </div>
+              <ul class="nav navbar-right">
+                <li class="navigation_bar_list"><a href="searchPage.php">Search Services</a></li>
+                <li class="navigation_bar_list"><a href="signup_po.php">Sign up (Pet Owner)</a></li>
+                <li class="navigation_bar_list"><a href="signup_ps.php">Sign up (Pet Sitter)</a></li>
+                <li class="navigation_bar_list"><a href="login_po.php">Login (Pet Owner)</a></li>
+                <li class="navigation_bar_list"><a href="login_ps.php">Login (Pet Sitter)</a></li>
+              </ul>
+            </div>
+          </nav>';
+  }
 }
  ?>
