@@ -24,7 +24,8 @@
 
       if($numRow != 1){
         session_destroy();
-        echo "Fatal error logging in please try again";
+        echo "<script>alert('Incorrect Email/ Password please try again')</script>";
+        include('login_po.php');
         exit();
       }
       else{
