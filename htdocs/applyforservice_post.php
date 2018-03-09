@@ -20,15 +20,16 @@
     $endDate        = $_POST[endDate];
     $additionalInfo = $_POST[additionalInfo];
     $bid            = $_POST[bid];
-    $email          = $_SESSION['email'];
+    $petownerid     = $_SESSION['id'];
     $serviceid      = $_SESSION['serviceid'];
-    $sitterEmail    = $_SESSION['ps_email'];
+    $petsitterid    = $_SESSION['petsitterid'];
 
-    $q =  "INSERT INTO request(requestId,requeststart,requestend,message,owneremail,serviceid,bid, sitteremail) VALUES('$reqId','$startDate','$endDate','$additionalInfo','$email', '$serviceid','$bid', '$sitterEmail')";
+    $q =  "INSERT INTO request(requestId,requeststart,requestend,message,petownerid,serviceid,bid, petsitterid) VALUES('$reqId','$startDate','$endDate','$additionalInfo','$petownerid', '$serviceid','$bid', '$petsitterid')";
 
     $execute = pg_query($db,$q);
 
     if($execute){
+      echo "<script>alert('Request was successfully made!')</script>";
       include('madeRequest.php'); //re route to correct place
     }
     else{

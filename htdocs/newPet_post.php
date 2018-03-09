@@ -6,7 +6,7 @@
     die('Connection failed.??');
   }
 
-  $email = $_SESSION["email"];
+  $id = $_SESSION["id"];
 
   $allPets = pg_query($db, "SELECT * FROM pet");
   $numRow = pg_num_rows($allPets);
@@ -24,8 +24,8 @@
         $gender = "f";
       }
 
-      $execute = pg_query($db, "INSERT INTO pet(petid,petName,sex,breed,dob,additionalInfo,email,pettype)
-      VALUES('$numRow','$_POST[petName]','$gender','$_POST[breed]','$_POST[dob]','$_POST[additionalInfo]','$email','$_POST[type]')");
+      $execute = pg_query($db, "INSERT INTO pet(petid,petName,sex,breed,dob,additionalInfo,petownerid,pettype)
+      VALUES('$numRow','$_POST[petName]','$gender','$_POST[breed]','$_POST[dob]','$_POST[additionalInfo]','$id','$_POST[type]')");
 
       if($execute){
         echo "<script>alert('New pet has been added!')</script>";

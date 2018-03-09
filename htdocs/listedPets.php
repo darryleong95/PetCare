@@ -35,8 +35,8 @@
           if (!$db) {
             die('Connection failed.??');
           }
-          $email = $_SESSION["email"];
-          $result = pg_query($db, "SELECT * FROM pet WHERE email = '$email'");
+          $id = $_SESSION["id"];
+          $result = pg_query($db, "SELECT * FROM pet WHERE petownerid = '$id'");
           while ($row = pg_fetch_array($result)) {
               echo 'Pet name: ', $row['petname'], "<br>" ;
               if($row['sex'] == 't'){
@@ -48,7 +48,7 @@
               echo "Pet Type: ", $row['pettype'], "<br>";
               echo "Breed: ", $row['breed'], "<br>";
               echo "Date of birth: ", $row['dob'], "<br>";
-              echo "Additional Info: ", $row['additionalInfo'];
+              echo "Additional Info: ", $row['additionalinfo'];
               echo nl2br("<br><br>") ;
           }
 

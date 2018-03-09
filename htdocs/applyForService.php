@@ -9,13 +9,13 @@
     $q = "SELECT * FROM service WHERE serviceid = '$_POST[id]'";
     $execute = pg_query($db,$q);
     while($row = pg_fetch_array($execute)) {
-        $_SESSION['startDate'] = $row['servicestart'];
-        $_SESSION['endDate']   = $row['serviceend'];
-        $_SESSION['title']     = $row['servicetitle'];
-        $_SESSION['max']       = $row['max'];
-        $_SESSION['price']     = $row['price'];
-        $_SESSION['ps_email']  = $row['email'];
-        $_SESSION['serviceid'] = $row['serviceid'];
+        $_SESSION['startDate']    = $row['servicestart'];
+        $_SESSION['endDate']      = $row['serviceend'];
+        $_SESSION['title']        = $row['servicetitle'];
+        $_SESSION['max']          = $row['max'];
+        $_SESSION['price']        = $row['price'];
+        $_SESSION['petsitterid']  = $row['petsitterid'];
+        $_SESSION['serviceid']    = $row['serviceid'];
     }
   }
   else{
@@ -73,78 +73,82 @@
           $results = pg_query($db,$q1);
 
           //check whether pet owner has already made a request
-          $ownerEmail = $_SESSION["email"];
-          $q2 = "SELECT * FROM request WHERE serviceid = '$_POST[id]' AND owneremail = '$ownerEmail'";
+          $id = $_SESSION["id"];
+          $q2 = "SELECT * FROM request WHERE serviceid = '$_POST[id]' AND petownerid = '$id'";
           $results2 = pg_query($db,$q2);
 
-          if(pg_num_rows($results2) != 0){
-            echo "<div class='form-group alert alert-warning'>
-                    <strong>You have already made a request for this Sitter.</strong>
-                  </div>
-                  <div class='form-group sign_up_submit'>
-                    <center>
-                      <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
-                    </center>
-                  </div>";
-          }
-          else{
-            if(pg_num_rows($results) == 0){
-              echo "<div class='form-group sign_up_submit'>
+
+            if($_SESSION["petsitterid"] == $_SESSION["id"]){
+              // tell them that they cannot register
+              echo "<div class='form-group alert alert-warning'>
+                <strong>You cannot register for you own service ._. What are you trying to do?</strong>
+                </div>
+                <div class='form-group sign_up_submit'>
                   <center>
-                    <input type='submit' name='submit' value='Register my Pet!' class='btn'/>
+                    <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
                   </center>
-                </div>";
+                </div>
+                ";
             }
             else{
-              while($row = pg_fetch_array($results)){
-                $start = $row['requeststart'];
-                $end   = $row['requestend'];
-                if($row['owneremail'] == $_SESSION[email]){
-                  echo "<div class='form-group alert alert-warning'>
-                    <strong>You have already made a request for this Sitter.</strong>
-                    </div>
-                    <div class='form-group sign_up_submit'>
-                      <center>
-                        <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
-                      </center>
-                    </div>
-                    ";
-                }
-                else if($_SESSION[email] == $row['sitteremail']){
-                  echo "<div class='form-group alert alert-warning'>
-                    <strong>You cannot register for you own service ._. What are you trying to do?</strong>
-                    </div>
-                    <div class='form-group sign_up_submit'>
-                      <center>
-                        <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
-                      </center>
-                    </div>
-                    ";
-                }
-                else if(!$_SESSION[email]){
-                  echo "<div class='form-group alert alert-warning'>
-                    <strong>You must be logged in to make a Request.</strong>
-                    </div>
-                    <div class='form-group sign_up_submit'>
-                      <center>
-                        <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
-                      </center>
-                    </div>
-                    ";
-                }
-                else{
-                  echo "<div class='form-group alert alert-warning'>
-                    <strong>*Please note that the sitter has already accepted a booking from $start to $end*</strong>
-                    </div>
-                    <div class='form-group sign_up_submit'>
+              if(pg_num_rows($results2) != 0){
+                echo "<div class='form-group alert alert-warning'>
+                        <strong>You have already made a request for this Sitter.</strong>
+                      </div>
+                      <div class='form-group sign_up_submit'>
+                        <center>
+                          <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
+                        </center>
+                      </div>";
+              }
+              else{
+                if(pg_num_rows($results) == 0){
+                  echo "<div class='form-group sign_up_submit'>
                       <center>
                         <input type='submit' name='submit' value='Register my Pet!' class='btn'/>
                       </center>
                     </div>";
                 }
+                else{
+                  while($row = pg_fetch_array($results)){
+                    $start = $row['requeststart'];
+                    $end   = $row['requestend'];
+                    if($row['owneremail'] == $_SESSION[email]){
+                      echo "<div class='form-group alert alert-warning'>
+                        <strong>You have already made a request for this Sitter.</strong>
+                        </div>
+                        <div class='form-group sign_up_submit'>
+                          <center>
+                            <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
+                          </center>
+                        </div>
+                        ";
+                    }
+                    else if(!$_SESSION[email]){
+                      echo "<div class='form-group alert alert-warning'>
+                        <strong>You must be logged in to make a Request.</strong>
+                        </div>
+                        <div class='form-group sign_up_submit'>
+                          <center>
+                            <input type='submit' name='submit' value='Register my Pet!' class='btn'disabled/>
+                          </center>
+                        </div>
+                        ";
+                    }
+                    else{
+                      echo "<div class='form-group alert alert-warning'>
+                        <strong>*Please note that the sitter has already accepted a booking from $start to $end*</strong>
+                        </div>
+                        <div class='form-group sign_up_submit'>
+                          <center>
+                            <input type='submit' name='submit' value='Register my Pet!' class='btn'/>
+                          </center>
+                        </div>";
+                    }
+                  }
+                }
               }
             }
-          }
          ?>
     </form>
   </div>

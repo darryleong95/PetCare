@@ -22,21 +22,21 @@
       $result = pg_query($db, "SELECT * FROM petsitter WHERE email = '$email' AND password = '$password';");
       $numRow = pg_num_rows($result);
 
-      if($numRow != 1){
+      if($numRow == 0){
         session_destroy();
         echo "Fatal error logging in please try again";
         exit();
       }
       else{
-        while($row = pg_fetch_row($result)){
-          $_SESSION["firstName"]      = $row[0];
-          $_SESSION["lastName"]       = $row[1];
-          $_SESSION["email"]          = $row[2];
-          $_SESSION["password"]       = $row[3];
-          $_SESSION["address"]        = $row[4];
-          $_SESSION["avgrating"]      = $row[5];
-          $_SESSION["additionalinfo"] = $row[6];
+        while($row = pg_fetch_array($result)){
+          $_SESSION["firstName"]      = $row['firstname'];
+          $_SESSION["lastName"]       = $row['lastname'];
+          $_SESSION["email"]          = $row['email'];
+          $_SESSION["password"]       = $row['password'];
+          $_SESSION["address"]        = $row['address'];
+          $_SESSION["additionalinfo"] = $row['additionalinformation'];
           $_SESSION["userType"]       = "ps";
+          $_SESSION["id"]             = $row['petsitterid'];
           //echo "<a href='profile.php'>Click here to view your profile!</a>";
         }
         include("profile_ps.php");

@@ -23,7 +23,7 @@
       </div>
       <div class="col-sm-9">
           <div class="header">
-            <h2>Pets Services</h2>
+            <h2>Services</h2>
           </div>
           <br>
           <!--Loop listed pet results-->
@@ -32,8 +32,8 @@
             if (!$db) {
               die('Connection failed.??');
             }
-            $email = $_SESSION["email"];
-            $q = "SELECT * FROM service WHERE email = '$email'";
+            $id = $_SESSION["id"];
+            $q = "SELECT * FROM service WHERE petsitterid = '$id'";
 
             $result = pg_query($db,$q);
 

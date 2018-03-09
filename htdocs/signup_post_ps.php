@@ -15,19 +15,19 @@
       $result1 = pg_query($db, "SELECT * FROM petsitter WHERE petsitterId >= all(SELECT petsitterId FROM petsitter s2)");
       if(pg_num_rows($result1) != 0){
         while($row = pg_fetch_array($result1)){
-          $newId = $row['petsitterId'] + 1;
+          $newId = $row['petsitterid'] + 1;
         }
       }
       else{
         $newId = 0;
       }
 
-      $execute = pg_query($db, "INSERT INTO petsitter(petsitterId,firstname,lastname,email,password,address)
+      $execute = pg_query($db, "INSERT INTO petsitter(petsitterid,firstname,lastname,email,password,address)
       VALUES('$newId','$_POST[firstName]','$_POST[lastName]','$_POST[email]','$_POST[password]','$_POST[address]')");
 
       if($execute){
         //redirect to profile page
-        $_SESSION["id"]= $newId;
+        $_SESSION["id"]       = $newId;
         $_SESSION["firstName"]= $_POST[firstName];
         $_SESSION["lastName"] = $_POST[lastName];
         $_SESSION["address"]  = $_POST[address];

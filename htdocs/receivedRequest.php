@@ -35,8 +35,8 @@
           if (!$db) {
             die('Connection failed.??');
           }
-          $email = $_SESSION["email"];
-          $result = pg_query($db, "SELECT * FROM request WHERE sitteremail = '$email'");
+          $id = $_SESSION["id"];
+          $result = pg_query($db, "SELECT * FROM request WHERE petsitterid = '$id'");
           while ($row = pg_fetch_array($result)) {
               echo 'Request ID        : ', $row['requestid'], "<br>" ;  // works just fine
               echo "Request Start date: ", $row['requeststart'], "<br>"; // works just fine

@@ -14,7 +14,7 @@
       $_SESSION["email"]          = $email;
       $_SESSION["password"]       = $password;
       $_SESSION["userType"]       = "ad";
-      
+
       echo "<script>alert('Welcome Mr. Admin')</script>";
       include('adminPage.php');
     }
@@ -28,13 +28,14 @@
         exit();
       }
       else{
-        while($row = pg_fetch_row($result)){
-          $_SESSION["firstName"] = $row[0];
-          $_SESSION["lastName"] = $row[1];
-          $_SESSION["email"] = $row[2];
-          $_SESSION["password"] = $row[3];
-          $_SESSION["address"] = $row[4];
-          $_SESSION["userType"] = "po";
+        while($row = pg_fetch_array($result)){
+          $_SESSION["firstName"]      = $row['firstname'];
+          $_SESSION["lastName"]       = $row['lastname'];
+          $_SESSION["email"]          = $row['email'];
+          $_SESSION["password"]       = $row['password'];
+          $_SESSION["address"]        = $row['address'];
+          $_SESSION["userType"]       = "po";
+          $_SESSION["id"]             = $row['petownerid'];
 
           include("profile_po.php");
           //echo "<a href='profile.php'>Click here to view your profile!</a>";

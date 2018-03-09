@@ -11,7 +11,7 @@
 
   if(isset($_POST['submit'])){
 
-      $email = $_SESSION["email"];
+      $id = $_SESSION["id"];
 
 
       $allServices = pg_query($db, "SELECT serviceid FROM service s1 WHERE serviceid >= all(SELECT serviceid FROM service s2)");
@@ -32,7 +32,7 @@
       $max = $_POST[max];
       $price = $_POST[price];
 
-      $q =  "INSERT INTO service(serviceId,serviceTitle,serviceStart,serviceEnd,max,price,email) VALUES('$numRow','$title','$startDate','$endDate','$max','$price','$email')";
+      $q =  "INSERT INTO service(serviceId,serviceTitle,serviceStart,serviceEnd,max,price,petsitterid) VALUES('$numRow','$title','$startDate','$endDate','$max','$price','$id')";
 
       $execute = pg_query($db,$q);
 
@@ -43,7 +43,7 @@
         //works
         while ($date->format('Y-m-d') <= $dateEnd->format('Y-m-d')) {
           $insertDate = $date->format('Y-m-d');
-          $q1 = "INSERT INTO service_dates(date_avail,sitter_email,serviceid) VALUES('$insertDate','$email','$numRow')";
+          $q1 = "INSERT INTO service_dates(date_avail,petsitterid,serviceid) VALUES('$insertDate','$id','$numRow')";
           $execute1 = pg_query($db,$q1);
           $date->modify('+1 day');
          }
