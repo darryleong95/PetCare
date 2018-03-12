@@ -27,13 +27,13 @@
 
       if($execute){
         //redirect to profile page
-        $_SESSION["id"]       = $newId;
-        $_SESSION["firstName"]= $_POST[firstName];
-        $_SESSION["lastName"] = $_POST[lastName];
-        $_SESSION["address"]  = $_POST[address];
-        $_SESSION["email"]    = $_POST[email];
-        $_SESSION["password"] = $_POST[password];
-        $_SESSION["userType"] = "ps";
+        $_SESSION["id"]        = $newId;
+        $_SESSION["firstName"] = $_POST[firstName];
+        $_SESSION["lastName"]  = $_POST[lastName];
+        $_SESSION["address"]   = $_POST[address];
+        $_SESSION["email"]     = $_POST[email];
+        $_SESSION["password"]  = $_POST[password];
+        $_SESSION["userType"]  = "ps";
 
         include("profile_ps.php");
       }

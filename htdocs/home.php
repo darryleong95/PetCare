@@ -1,4 +1,5 @@
 <?php
+  session_start();
   include 'navbar.php';
  ?>
 <!DOCTYPE html>
@@ -15,7 +16,7 @@
   <div class="dummyWrapper"></div>
   <div class="wrapper">
     <div class="container">
-      <a class="btn btn-primary outline" href="searchPage.php" role="button">Browse Available Services</a>
+      <a class="btn" href="searchPage.php" role="button">Browse Available Services</a>
       <br><br>
       <p class="desc">Find a nice home for your pet while you're away, they deserve it.</p>
     </div>

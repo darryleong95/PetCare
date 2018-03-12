@@ -113,7 +113,7 @@
                   while($row = pg_fetch_array($results)){
                     $start = $row['requeststart'];
                     $end   = $row['requestend'];
-                    if($row['owneremail'] == $_SESSION[email]){
+                    if($row['petownerid'] == $_SESSION["id"]){
                       echo "<div class='form-group alert alert-warning'>
                         <strong>You have already made a request for this Sitter.</strong>
                         </div>
@@ -124,7 +124,7 @@
                         </div>
                         ";
                     }
-                    else if(!$_SESSION[email]){
+                    else if(!$_SESSION["id"]){
                       echo "<div class='form-group alert alert-warning'>
                         <strong>You must be logged in to make a Request.</strong>
                         </div>
