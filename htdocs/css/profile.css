@@ -1,0 +1,188 @@
+/*==============================Imported Fonts==========================================
+=======================================================================================*/
+@font-face {
+  font-family: Ubuntu-Regular;
+  src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu-Bold;
+  src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
+}
+
+
+/*==============================General Styling==========================================
+=======================================================================================*/
+html,
+body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.inner-container{
+  height: 100%;
+  width: 100%;
+}
+
+.content-wrapper{
+  height:90%;
+  display: grid;
+  grid-template:"a b c"
+                "a b c";
+  background-color: #6b61ab;
+}
+
+.profile-section{
+  height: auto;
+  grid-area: a;
+  margin: 20px auto;
+  width: 90%;
+  background-color: white;
+  border-radius: 10px;
+  padding:10px;
+}
+
+.new-service-section{
+  grid-area: b;
+  margin: 20px auto;
+  height: auto;
+  width: 90%;
+  background-color: white;
+  border-radius: 10px;
+  padding:10px;
+}
+
+.upcoming-section{
+  grid-area: c;
+  margin: 20px auto;
+  height: auto;
+  width: 90%;
+  background-color: white;
+  border-radius: 10px;
+  padding:10px;
+}
+
+textarea.profile{
+  resize: none;
+}
+/*==============================Profile Styling==========================================
+=======================================================================================*/
+.profile{
+  padding: 12px 20px 0px 20px;
+}
+
+.header-profile{
+  font-family:'Ubuntu-Bold';
+  text-align: center;
+}
+
+.btn-profile{
+  width: 100%;
+  height: 60px;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #ff903b;
+  transition: 1s;
+  font-family: Ubuntu-Regular;
+  color:white;
+}
+
+.btn-profile:hover{
+  cursor: pointer;
+  background-color: #615fc4;
+  transition: 1s;
+
+}
+
+.form-profile{
+  padding-top: 20px;
+}
+
+/*============================New Service Styling========================================
+=======================================================================================*/
+
+.new-service{
+  padding: 12px 20px 0px 20px;
+}
+
+.header-new-service{
+  font-family:'Ubuntu-Bold';
+  text-align: center;
+}
+.btn-list{
+  width: 100%;
+  height: 60px;
+  border-radius: 5px;
+  border-style: none;
+  background-color: #ff903b;
+  transition: 1s;
+  font-family: Ubuntu-Regular;
+  color:white;
+}
+
+.btn-list:hover{
+  cursor: pointer;
+  background-color: #615fc4;
+  transition: 1s;
+
+}
+
+/*===========================Upcoming Styling==========================================
+=======================================================================================*/
+.upcoming{
+  padding: 25px 20px 0px 20px;
+}
+
+.header-upcoming{
+  font-family:'Ubuntu-Bold';
+  text-align: center;
+}
+
+.header-upcoming p{
+  font-family: Ubuntu-Regular;
+  font-size: 12px;
+}
+
+.upcoming-result{
+  color:black;
+  font-family: Quicksand;
+  background-color: #f0ebff;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.upcoming-no-result{
+  color:black;
+  font-family: Quicksand;
+  background-color: #f0ebff;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.btn-request{
+  margin-top: 50px;
+  width: 100%;
+  background-color: #ff903b;
+  color:white;
+  transition: 1s;
+  height: 50px;
+  padding: 10px;
+  text-decoration: none;
+  border-style: none;
+  border-radius: 5px;
+  font-family: Ubuntu-Regular;
+}
+
+.btn-request:hover{
+  cursor: pointer;
+  background-color: #615fc4;
+  transition: 1s;
+}
+
+
+/*==============================Request Styling==========================================
+=======================================================================================*/

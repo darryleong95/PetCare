@@ -10,12 +10,14 @@
 
   <meta charset="utf-8">
 
-  <meta charset="utf-8">
   <link rel="stylesheet" href="css/form.css">
-  <link rel="stylesheet" href="css/sideBar.css">
   <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+  <!--===============================================================================================-->
+  <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 </header>
 <body>
   <div class="container">

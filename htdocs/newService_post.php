@@ -48,7 +48,7 @@
       }
       else{
         echo "<script>alert('Not able to create new service')</script>";
-        include('newService.php');
+        include('profile_ps.php');
       }
   }
 
