@@ -41,14 +41,15 @@ body{
   grid-gap: 10px 0px;
 }
 
-.deleteForm{
+.deleteForm,
+.acceptRequest{
   grid-area: b;
   background-color:white;
   padding: 10px;
   margin: 0 auto;
   width: 90%;
   border-radius: 10px;
-  height: 45%;
+  height: auto;
 }
 
 .header-service{
@@ -129,7 +130,8 @@ input.form-control:focus{
     background-color:#e8e6e4;
 }
 
-.btn-delete-service{
+.btn-delete-service,
+.btn-accept-request{
   width: 80%;
   margin: 10px auto;
   height: 60px;
@@ -142,7 +144,8 @@ input.form-control:focus{
   color:white;
 }
 
-.btn-delete-service:hover{
+.btn-delete-service:hover,
+.btn-accept-request:hover{
   background-color: #364156;
   transition: 1s;
 }

@@ -5,7 +5,7 @@
   if(isset($_POST['submit'])){
 
     $id = $_POST[id];
-    $q = "DELETE FROM service WHERE serviceid = '$_POST[id]'";
+    $q = "DELETE FROM service WHERE serviceid = '$id'";
 
     $execute = pg_query($db,$q);
 
