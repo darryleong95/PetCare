@@ -1,4 +1,48 @@
-/*navbar stuff*/
-.navigation_bar_list{
-    padding: 10px;
+.navbar{
+  background-color: white;
+}
+
+.ul{
+  width 100%;
+  background: rgba(0,0,0,0.2);
+  list-style-type: none;
+  overflow: hidden;
+}
+
+.li{
+  text-decoration: none;
+}
+
+.nav_links{
+  margin: 0px;
+}
+
+.navbar-brand{
+  font-size: 15px;
+  font-family: 'Quicksand';
+  color: black;
+  text-decoration: none;
+  padding-left: 35px;
+  font-weight: bold;
+}
+
+.navbar-brand:hover{
+  text-decoration: none;
+  color: black;
+
+}
+
+.nav-link{
+  color: black;
+  font-size: 15px;
+  font-family: 'Quicksand';
+  text-decoration: none;
+  transition: 1s;
+}
+
+.nav-link:hover{
+  background: rgb(0,0,0,0.2);
+  color: black;
+  text-decoration:none;
+  -webkit-transition: color 0.5s ease-out, border 0.5s ease-out;
 }

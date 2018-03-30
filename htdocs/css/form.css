@@ -1,24 +1,153 @@
-.form-area{
-    margin: auto;
-    padding: 10px;
-    height: 50%;
-    width: 70%;
+/*==============================Imported Fonts==========================================
+=======================================================================================*/
+@font-face {
+  font-family: Ubuntu-Regular;
+  src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
 }
 
-.btn{
-  width: 200px;
+@font-face {
+  font-family: Ubuntu-Bold;
+  src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
 }
 
-.container{
-    position: absolute;
-    height: 100%;
-    width: 100%;
+/*==============================General page Styling==========================================
+=======================================================================================*/
+html,
+body{
+  margin: 0;
+  height: 100%;
+  width: 100%;
 }
 
-.row{
-    /* display: table-cell; */
-    vertical-align: middle;
+.inner-container{
+  height: 100%;
+  width: 100%;
 }
 
-.form-area{
-  text-align: left;
+.content-wrapper{
+  height:85%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: url("../img/login2.jpg");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+}
+
+.additional-info-wrapper{
+  height: 32.7%;
+  background-color: white;
+}
+
+.pet-owner-wrapper,
+.pet-sitter-wrapper{
+  margin: auto;
+  position: relative;
+}
+
+.pet-sitter-content,
+.pet-owner-content{
+  width: 500px;
+  margin: 100px;
+  padding: 15px;
+  background-color: rgb(0,0,0,0.2);
+  border-radius: 5px;
+}
+
+/*==============================Header Styling==========================================
+=======================================================================================*/
+.owner-header{
+  font-family: Ubuntu-Bold;
+  font-size: 30px;
+  color: #827ffe;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+
+.sitter-header{
+  font-family: Ubuntu-Bold;
+  font-size: 30px;
+  color: #2b915e;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+/*==============================Input Styling==========================================
+=======================================================================================*/
+input.form-control::-webkit-input-placeholder {
+  font-weight: 400;
+  font-size: 17px;
+  font-family: Ubuntu-Bold;
+  background-color: inherit;
+}
+
+input.form-control{
+  background-color:#e8e6e4;
+  border:none;
+  text-decoration: none;
+  height: 50px;
+}
+
+input.form-control:focus{
+    box-shadow: 0 0 5px #3584eb;
+    border: 1px solid #3584eb;
+    background-color:#e8e6e4;
+}
+
+/*==============================Submit button Styling==========================================
+=======================================================================================*/
+.btn.owner-submit{
+  background-color: #827ffe;
+  color:white;
+  font-family: Ubuntu-Regular;
+  padding: 0 20px;
+  width: 100%;
+  height: 62px;
+  -webkit-transition: all 0.7s;
+  -o-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
+.btn.owner-submit:hover{
+  background-color: #403866;
+}
+
+.btn.sitter-submit{
+  background-color: #16de8e;
+  color:white;
+  font-family: Ubuntu-Regular;
+  padding: 0 20px;
+  width: 100%;
+  height: 62px;
+  -webkit-transition: all 0.7s;
+  -o-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
+.btn.sitter-submit:hover{
+  background-color: #2b915e;
+}
+
+/*==============================Additional Info Styling==========================================
+=======================================================================================*/
+
+.additional-info-content{
+  padding: 10px;
+  height: 80%;
+  width: 80%;
+  margin: 0 auto;
+  background-color: grey;
+}
+
+.wb{
+  font-weight: bold;
+}

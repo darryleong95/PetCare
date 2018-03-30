@@ -1,100 +1,180 @@
+<?php
+  session_start();
+  include('connection.php');
+?>
 <!DOCTYPE html>
 <html>
-<header>
-  <title>Login</title>
+  <head>
+    <title>Login</title>
 
-  <meta charset="utf-8">
+    <meta charset="utf-8">
 
-  <link rel="stylesheet" href="css/form.css">
-  <link rel="stylesheet" href="css/navbar.css">
-  <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Raleway" />
+    <link rel="stylesheet" href="css/form.css?version=2">
+    <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+    <!--===============================================================================================-->
+	   <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-</header>
-<body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="home.php">PetCare</a>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="inner-container">
+      <div class="nav-wrapper">
+        <?php include('navbar.php') ?>
       </div>
-      <ul class="nav navbar-right">
-        <li class="navigation_bar_list"><a href="#">Search Services</a></li>
-        <li class="navigation_bar_list"><a href="signup.php">Sign up</a></li>
-      </ul>
-    </div>
-  </nav>
-  <div class="form-area">
-    <div class="header">
-      <h2>Sign up form</h2>
-    </div>
-    <form name="signup_form" class="suForm form-horizontal form_font" method="POST" action="" onsubmit="return Validate()">
-      <div class="form-group">
-        <label class="control-label col-xs-3" for="username">Username:</label>
-        <div class="col-xs-8" id="user_div">
-          <input class="form-control" id="username" type="text" name="username" placeholder="Enter username (required)" value=""/>
-          <div id="user_err"></div>
+      <div class="content-wrapper">
+        <div class="pet-owner-wrapper">
+          <div class="form-area pet-owner-content">
+            <div class="owner-header">
+              <h2>Owner</h2>
+            </div>
+            <form name="login_form_owner" class="suForm form-horizontal form_font" method="POST" action="login_post_po.php" onsubmit="return ValidateOwner()">
+              <div class="form-group">
+                <div class="" id="email_div_owner">
+                  <input class="form-control" id="email" type="text" name="email" placeholder="Email" value=""/>
+                  <div id="email_err_owner"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="" id="pass_div_owner">
+                  <input class="form-control" id="password" type="password" name="password" placeholder="Password"/>
+                  <div id="pass_err_owner"></div>
+                </div>
+              </div>
+              <div class="sign_up_submit">
+                <center>
+                  <input type="submit" name="submit" value="Login" class="btn owner-submit"/>
+                </center>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="pet-sitter-wrapper">
+          <div class="form-area pet-sitter-content">
+            <div class="sitter-header">
+              <h2>Sitter</h2>
+            </div>
+            <form name="login_form_sitter" class="suForm form-horizontal form_font" method="POST" action="login_post_ps.php" onsubmit="return ValidateSitter()">
+              <div class="form-group">
+                <div class="" id="email_div_sitter">
+                  <input class="form-control" id="email" type="text" name="email" placeholder="Email" value=""/>
+                  <div id="email_err_sitter"></div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="" id="pass_div_sitter">
+                  <input class="form-control" id="password" type="password" name="password" placeholder="Password"/>
+                  <div id="pass_err_sitter"></div>
+                </div>
+              </div>
+              <div class="sign_up_submit">
+                <center>
+                  <input type="submit" name="submit" value="Login" class="btn sitter-submit"/>
+                </center>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label class="control-label col-xs-3" for="password">Password: </label>
-        <div class="col-xs-8" id="pass_div">
-          <input class="form-control" id="password" type="password" name="password" placeholder="Enter password (required)"/>
-          <div id="pass_err"></div>
+      <footer style="font-family:'Quicksand'; font-size:15px;">&copy;CS2102 Project: Pet Care, Group 32</footer>
+      <!-- <div class="additional-info-wrapper">
+        <div class="additional-info-content">
+          <h1 class="wb">Welcome Back</h1>
         </div>
-      </div>
-      <div class="sign_up_submit">
-        <center>
-          <input type="submit" name="register" value="Login" class="btn"/>
-        </center>
-      </div>
-    </form>
-  </div>
-</body>
+      </div> -->
+    </div>
+  </body>
 </html>
 <script type="text/javascript">
-  var username = document.forms['signup_form']['username'];
-  var password = document.forms['signup_form']['password'];
+  var email_owner = document.forms['login_form_owner']['email'];
+  var password_owner = document.forms['login_form_owner']['password'];
 
-  var user_err = document.getElementById("user_err");
-  var pass_err = document.getElementById("pass_err");
+  var email_err_owner = document.getElementById("email_err_owner");
+  var pass_err_owner = document.getElementById("pass_err_owner");
 
-  username.addEventListener('blur', userVerify, true);
-  password.addEventListener('blur', passVerify, true);
+  email_owner.addEventListener('blur', emailOwnerVerify, true);
+  password_owner.addEventListener('blur', passOwnerVerify, true);
 
-  function Validate() {
+  function ValidateOwner() {
    //validate username
-   if (username.value.trim() == "") {
-     username.style.border = "1px solid red";
-     document.getElementById('user_div').style.color = "red";
-     user_err.textContent = "Username is required";
-     username.focus();
+   if (email_owner.value.trim() == "") {
+     email_owner.style.border = "1px solid red";
+     document.getElementById('email_div_owner').style.color = "red";
+     email_err_owner.textContent = "Email is required";
+     email_owner.focus();
      return false;
    }
    //validate password
-   if (password.value == "") {
-     password.style.border = "1px solid red";
-     document.getElementById('pass_div').style.color = "red";
-     pass_err.textContent = "Password is required";
-     password.focus();
+   if (password_owner.value == "") {
+     password_owner.style.border = "1px solid red";
+     document.getElementById('pass_div_owner').style.color = "red";
+     pass_err_owner.textContent = "Password is required";
+     password_owner.focus();
      return false;
    }
   }
 
-  function userVerify() {
-   if (username.value.trim() != "") {
-    username.style.border = "1px solid #5e6e66";
-    document.getElementById('user_div').style.color = "#5e6e66";
-    user_err.innerHTML = "";
+  function emailOwnerVerify() {
+   if (email_owner.value.trim() != "") {
+    email_owner.style.border = "1px solid #5e6e66";
+    document.getElementById('email_div_owner').style.color = "#5e6e66";
+    email_err_owner.innerHTML = "";
     return true;
    }
   }
 
-  function passVerify() {
-   if (password.value != "") {
-    password.style.border = "1px solid #5e6e66";
-    document.getElementById('breed_div').style.color = "#5e6e66";
-    pass_err.innerHTML = "";
+  function passOwnerVerify() {
+   if (password_owner.value != "") {
+    password_owner.style.border = "1px solid #5e6e66";
+    document.getElementById('pass_div_owner').style.color = "#5e6e66";
+    pass_err_owner.innerHTML = "";
+    return true;
+   }
+  }
+
+  var email_sitter = document.forms['login_form_sitter']['email'];
+  var password_sitter = document.forms['login_form_sitter']['password'];
+
+  var email_err_sitter = document.getElementById("email_err_sitter");
+  var pass_err_sitter = document.getElementById("pass_err_sitter");
+
+  email_sitter.addEventListener('blur', emailSitterVerify, true);
+  password_sitter.addEventListener('blur', passSitterVerify, true);
+
+  function ValidateSitter() {
+   //validate username
+   if (email_sitter.value.trim() == "") {
+     email_sitter.style.border = "1px solid red";
+     document.getElementById('email_div_sitter').style.color = "red";
+     email_err_sitter.textContent = "Email is required";
+     email_sitter.focus();
+     return false;
+   }
+   //validate password
+   if (password_sitter.value == "") {
+     password_sitter.style.border = "1px solid red";
+     document.getElementById('pass_div_sitter').style.color = "red";
+     pass_err_sitter.textContent = "Password is required";
+     password_sitter.focus();
+     return false;
+   }
+  }
+
+  function emailSitterVerify() {
+   if (email_sitter.value.trim() != "") {
+    email_sitter.style.border = "1px solid #5e6e66";
+    document.getElementById('email_div_sitter').style.color = "#5e6e66";
+    email_err_sitter.innerHTML = "";
+    return true;
+   }
+  }
+
+  function passSitterVerify() {
+   if (password_sitter.value != "") {
+    password_sitter.style.border = "1px solid #5e6e66";
+    document.getElementById('pass_div_sitter').style.color = "#5e6e66";
+    pass_err_sitter.innerHTML = "";
     return true;
    }
   }

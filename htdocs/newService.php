@@ -1,3 +1,8 @@
+<?php
+  session_start();
+  include('connection.php');
+  include 'navbar.php';
+?>
 <!DOCTYPE html>
 <html>
   <header>
@@ -23,76 +28,59 @@
 
   </header>
   <body>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="home.php">PetCare</a>
-        </div>
-        <ul class="nav navbar-right">
-          <li class="navigation_bar_list"><a href="searchPage.php">Search Services</a></li>
-          <li class="navigation_bar_list"><a href="#">Logout</a></li>
-        </ul>
-      </div>
-    </nav>
     <div class="container">
       <div class="row">
         <div class="col-sm-3">
-          <div class="wrapper">
-            <nav id="sidebar">
-                <!-- Sidebar Header -->
-                <div class="sidebar-header">
-                    <h3>User menu</h3>
-                </div>
-                <!-- Sidebar Links -->
-                <ul class="list-unstyled components">
-                    <li><a href="profile.php">Profile</a></li>
-                    <li><a href="newPet.php">New Pet</a></li>
-                    <li class="active"><a href="#">New Service</a></li>
-                    <li><a href="listedServices.php">Listed Service</a></li>
-                    <li><a href="listedPets.php">View Pets</a></li>
-                </ul>
-            </nav>
-          </div>
+          <?php include 'sidebar_ps.php' ?>
         </div>
         <div class="col-sm-9">
           <div class="form-area">
             <div class="header">
               <h2>List your Services</h2>
             </div>
-            <form name="service_form" class="suForm form-horizontal form_font" method="POST" action="" onsubmit="return Validate()">
+            <form name="service_form" class="suForm form-horizontal form_font" method="POST" action="newService_post.php" onsubmit="return Validate()">
               <div class="form-group">
-                <label class="control-label col-xs-3" for="un">Title:</label>
+                <label class="control-label col-xs-3" for="title">Title:</label>
                 <div id="title_div" class="col-xs-8">
-                  <input class="form-control" id="un" type="text" name="title" placeholder="Title" value=""/>
+                  <input class="form-control" id="title" type="text" name="title" placeholder="Title" />
                   <div id="title_err"></div>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="control-label col-xs-4" for="price">Price:</label>
+                <label class="control-label col-xs-4" for="price">Cost/Day:</label>
                 <div id="price_div" class="col-xs-8">
-                  <input class="form-control" id="price" type="number" name="price"/>
+                  <input class="form-control" id="price" type="number" name="price" step="0.01" min="1" />
                   <div id="price_err"></div>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="control-label col-xs-4" for="datefilter">Select date range:</label>
-                <div id="datefilter_div" class="col-xs-8">
-                  <input type="text" name="datefilter" value="" />
-                  <div id="datefilter_err"></div>
+                <label class="control-label col-xs-4" for="max">Maximum number of Pets: </label>
+                <div id="max_div" class="col-xs-8">
+                  <input class="form-control" id="max" type="number" name="max"/>
+                  <div id="max_err"></div>
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="control-label col-xs-3" for="addtionalInfo">Additional Information:</label>
-                <div class="col-xs-8">
-                  <textarea class="form-control" rows = "3" id="addtionalInfo" name="addtionalInfo" placeholder="Anything potential service users might want to know! (Optional)"></textarea>
+                <label class="control-label col-xs-4" for="startDate">Start Date:</label>
+                <div id="startDate_div" class="col-xs-8">
+                  <input size="21" type="date" id="startDate" name="startDate"/>
+                  <div id="startDate_err"></div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-xs-4" for="endDate">End Date:</label>
+                <div id="endDate_div" class="col-xs-8">
+                  <input size="21" type="date" id="endDate" name="endDate"/>
+                  <div id="endDate_err"></div>
                 </div>
               </div>
 
               <div class="sign_up_submit">
-                <input type="submit" name="register" value="List" class="btn"/>
+                <input type="submit" name="submit" value="List" class="btn"/>
               </div>
             </form>
           </div>
@@ -104,14 +92,24 @@
 <script type="text/javascript">
  var title = document.forms['service_form']['title'];
  var price = document.forms['service_form']['price'];
+ var max = document.forms['service_form']['max'];
+ var startDate = document.forms['service_form']['startDate'];
+ var endDate = document.forms['service_form']['endDate'];
 
  var title_err = document.getElementById("title_err");
  var price_err = document.getElementById("price_err");
+ var max_err = document.getElementById("max_err");
+ var startDate_err = document.getElementById("startDate_err");
+ var endDate_err = document.getElementById("endDate_err");
 
  title.addEventListener('blur', titleVerify, true);
  price.addEventListener('blur', priceVerify, true);
+ max.addEventListener('blur', maxVerify, true);
+ startDate.addEventListener('blur', startDateVerify, true);
+ endDate.addEventListener('blur', endDateVerify, true);
 
  function Validate() {
+
   // validate title
   if (title.value == "") {
     title.style.border = "1px solid red";
@@ -128,6 +126,53 @@
     price.focus();
     return false;
   }
+
+  //validate max
+  if (Number(max.value) <= 0) {
+    max.style.border = "1px solid red";
+    document.getElementById('max_div').style.color = "red";
+    max_err.textContent = "Max number of Pets must be greater than 0";
+    max.focus();
+    return false;
+  }
+
+  //validate startDate
+  if (!startDate.value) {
+    startDate.style.border = "1px solid red";
+    document.getElementById('startDate_div').style.color = "red";
+    startDate_err.textContent = "Please specify Start date of Service";
+    startDate.focus();
+    return false;
+  }
+
+  var d1 = Date.parse(moment());
+  var d2 = Date.parse(startDate.value);
+
+  if (startDate.value && d2 < d1) {
+    startDate.style.border = "1px solid red";
+    document.getElementById('startDate_div').style.color = "red";
+    startDate_err.textContent = "Please specify a possible Start date";
+    startDate.focus();
+    return false;
+  }
+
+  //validate endDate : Empty
+  if (!endDate.value) {
+    endDate.style.border = "1px solid red";
+    document.getElementById('endDate_div').style.color = "red";
+      endDate_err.textContent = "Please specify End date of Service";
+    endDate.focus();
+    return false;
+  }
+
+  //validate endDate : Time less than start date
+  if (endDate.value && startDate.value && newEndDate < newStartDate) {
+    endDate.style.border = "1px solid red";
+    document.getElementById('endDate_div').style.color = "red";
+    endDate_err.textContent = "End date cannot preceed Start date";
+    endDate.focus();
+    return false;
+  }
 }
 
 function titleVerify() {
@@ -140,10 +185,37 @@ function titleVerify() {
 }
 
 function priceVerify() {
-  if (price.value < 0) {
+  if (price.value > 0) {
    price.style.border = "1px solid #5e6e66";
    document.getElementById('price_div').style.color = "#5e6e66";
    price_err.innerHTML = "";
+   return true;
+  }
+}
+
+function maxVerify() {
+  if (max.value > 0) {
+   max.style.border = "1px solid #5e6e66";
+   document.getElementById('max_div').style.color = "#5e6e66";
+   max_err.innerHTML = "";
+   return true;
+  }
+}
+
+function startDateVerify() {
+  if (startDate.value) {
+   startDate.style.border = "1px solid #5e6e66";
+   document.getElementById('startDate_div').style.color = "#5e6e66";
+   startDate_err.innerHTML = "";
+   return true;
+  }
+}
+
+function endDateVerify() {
+  if (endDate.value) {
+   endDate.style.border = "1px solid #5e6e66";
+   document.getElementById('endDate_div').style.color = "#5e6e66";
+   endDate_err.innerHTML = "";
    return true;
   }
 }

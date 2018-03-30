@@ -1,0 +1,115 @@
+/*==============================Imported Fonts==========================================
+=======================================================================================*/
+@font-face {
+  font-family: Ubuntu-Regular;
+  src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu-Bold;
+  src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
+}
+
+/*==============================General page Styling==========================================
+=======================================================================================*/
+html,
+body{
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.inner-container{
+  height: 95%;
+  width: 100%;
+  background-color: #e8fffe;
+}
+
+.content-wrapper{
+  width: 40%;
+  margin: 50px auto;
+  background-color: white;
+  padding: 20px 30px 70px 30px;
+  border-radius: 10px;
+}
+
+/*==============================Input Styling==========================================
+=======================================================================================*/
+.header-owner{
+  font-family: Ubuntu-Bold;
+  font-size: 30px;
+  color: #CA6259;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+.header-sitter{
+  font-family: Ubuntu-Bold;
+  font-size: 30px;
+  color: #3D4935;
+  line-height: 1.2;
+  text-transform: uppercase;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+/*==============================Input Styling==========================================
+=======================================================================================*/
+input.form-control::-webkit-input-placeholder {
+  font-weight: 400;
+  font-size: 17px;
+  font-family: Ubuntu-Regular;
+  background-color: inherit;
+}
+
+input.form-control{
+  background-color:#ededed;
+  border:none;
+  text-decoration: none;
+  height: 50px;
+}
+
+input.form-control:focus{
+    box-shadow: 0 0 5px #3584eb;
+    border: 1px solid #3584eb;
+    background-color:white;
+}
+
+/*==============================Submit button Styling==========================================
+=======================================================================================*/
+.btn.owner{
+  background-color: #ebb4ae;
+  color:white;
+  font-family: Ubuntu-Regular;
+  padding: 0 20px;
+  width: 100%;
+  height: 62px;
+  -webkit-transition: all 0.7s;
+  -o-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
+.btn.owner:hover{
+  background-color: #CA6259;
+}
+
+.btn.sitter{
+  background-color: #99ad8e;
+  color:white;
+  font-family: Ubuntu-Regular;
+  padding: 0 20px;
+  width: 100%;
+  height: 62px;
+  -webkit-transition: all 0.7s;
+  -o-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  transition: all 0.7s;
+}
+
+.btn.sitter:hover{
+  background-color: #3D4935;
+}
