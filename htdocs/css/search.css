@@ -29,6 +29,13 @@ body{
   background-size: cover;
 }
 
+.inner-container.apply{
+  background-color: #56ff97;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+}
+
 .content-wrapper{
   display: table;
   position: absolute;
@@ -40,6 +47,12 @@ body{
 .apply-outer{
   display: table-cell;
   vertical-align: middle;
+}
+
+.apply-inner{
+  background-color: white;
+  padding: 50px;
+  border-radius: 10px;
 }
 
 .searchbar-inner,
@@ -144,4 +157,11 @@ textarea.apply{
   height: 70px;
   font-family: Ubuntu-Regular;
   font-size: 17px;
+}
+
+.apply-header{
+  padding: 10px;
+  margin-top: 20px;
+  text-align: center;
+  font-family: Ubuntu-Bold;
 }

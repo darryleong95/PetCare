@@ -27,9 +27,12 @@
 
 </header>
 <body>
-  <div class="inner-container.apply">
+  <div class="inner-container apply">
     <div class="nav-wrapper">
       <?php include('navbar.php'); ?>
+    </div>
+    <div class="apply-header">
+      <h2>Make a Request to sit your Pets!</h2>
     </div>
     <div class="overall-wrapper">
       <div class="content-wrapper">
@@ -66,22 +69,24 @@
                 <!-- check whether there have been accepted reqeuests already -->
                 <?php
                 include('connection.php');
-                  //check whether sitter has already accepted any requests
-                  $q1 = "SELECT * FROM request WHERE serviceid = '$_POST[id]' AND status = 'ACCEPTED'";
-                  $results = pg_query($db,$q1);
+                  $petownerid = $_SESSION["id"];
+                  $serviceId = $_SESSION['serviceid'];
 
+                  //check whether sitter has already accepted any requests
+                  $q1 = "SELECT * FROM request WHERE serviceid = '$serviceId' AND status = 'ACCEPTED';";
+
+                  $results = pg_query($db,$q1);
                   //check whether pet owner has already made a request
-                  $id = $_SESSION["id"];
-                  $q2 = "SELECT * FROM request WHERE serviceid = '$_POST[id]' AND petownerid = '$id'";
+                  $q2 = "SELECT * FROM request WHERE serviceid = $serviceId AND petownerid = $petownerid;";
                   $results2 = pg_query($db,$q2);
 
                   //compare email
                   $psid = $_SESSION['petsitterid'];
-                  $q3 = "SELECT * FROM petsitter WHERE petsitterid = '$psid'";
+                  $q3 = "SELECT * FROM petsitter WHERE petsitterid = '$psid';";
                   $results3 = pg_query($db,$q3);
 
                   //check whether sitter has already accepted any requests
-                  $q4 = "SELECT * FROM request WHERE serviceid = '$_POST[id]' AND petownerid = '$id'";
+                  $q4 = "SELECT * FROM request WHERE serviceid = '$serviceId' AND petownerid = '$id';";
                   $results4 = pg_query($db,$q4);
 
                   while($row = pg_fetch_array($results3)){
@@ -115,14 +120,14 @@
                       else{
                         if(pg_num_rows($results2) != 0){
                           echo "<div class='form-group alert alert-warning'>
-                            <center><strong>You have already made a request for this Sitter.</center></strong>
-                            </div>
-                            <div class='form-group sign_up_submit'>
-                              <center>
-                                <input type='submit' name='submit' value='Register my Pet!' class='btn apply' disabled/>
-                              </center>
-                            </div>
-                            ";
+                                  <center><strong>You have already made a request for this Sitter.</center></strong>
+                                </div>
+                                <div class='form-group sign_up_submit'>
+                                  <center>
+                                    <input type='submit' name='submit' value='Register my Pet!' class='btn apply' disabled/>
+                                  </center>
+                                </div>
+                                  ";
                         }
                         else if(pg_num_rows($results) != 0){
                           while($row = pg_fetch_array($results)){
