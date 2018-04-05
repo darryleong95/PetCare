@@ -20,7 +20,7 @@
       if($numRow == 0){
         session_destroy();
         echo "<script>alert('Incorrect Email/ Password please try again')</script>";
-        include('login.php');
+        header('Location:login.php');
         exit();
       }
       else{
@@ -33,9 +33,8 @@
           $_SESSION["additionalinfo"] = $row['additionalinformation'];
           $_SESSION["userType"]       = "ps";
           $_SESSION["id"]             = $row['petsitterid'];
-          //echo "<a href='profile.php'>Click here to view your profile!</a>";
         }
-        include("profile_ps.php");
+        header("Location:profile_ps.php");
       }
     }
   }

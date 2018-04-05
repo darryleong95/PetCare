@@ -15,7 +15,7 @@
     else{
       echo "<script>alert('Problem with removing Sitter: $id, please try again.')</script>";
     }
-    include('allSitters.php');
+    header('Location:allSitters.php');
 
   }
 

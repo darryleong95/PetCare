@@ -5,18 +5,28 @@
   if(isset($_POST['submit'])){
 
     $id = $_POST[id];
-    $q = "DELETE FROM service WHERE serviceid = '$id'";
+    $sitterid = $_SESSION['id'];
 
-    $execute = pg_query($db,$q);
+    $query = "SELECT * FROM service WHERE serviceid = '$id' AND petsitterid = '$sitterid'";
+    $execute1 = pg_query($db,$query);
 
-    if($execute){
-      echo "<script>alert('Succesfully deleted entry!')</script>";
+    if(pg_num_rows($execute1) == 0){
+      $_SESSION['alert-message-delete-service-fail'] = true;
+      header('Location:listedServices.php');
     }
     else{
-      echo "<script>alert('Problem with deleting entry, please try again. " .  $id .  ".')</script>";
-    }
-    include('listedServices.php');
+      $q = "DELETE FROM service WHERE serviceid = '$id'";
 
+      $execute2 = pg_query($db,$q);
+
+      if($execute2){
+        $_SESSION['alert-message-delete-service-pass'] = true;
+      }
+      else{
+        $_SESSION['alert-message-delete-service-fail-2'] = true;
+      }
+      header('Location:listedServices.php');
+    }
   }
 
  ?>

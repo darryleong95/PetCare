@@ -23,14 +23,16 @@ body{
 .inner-container{
   height: 100%;
   width: 100%;
+  overflow: auto;
+  display: block;
 }
 
 .content-wrapper{
-  height:90%;
   display: grid;
   grid-template:"a b c"
                 "a b c";
   background-color: #6b61ab;
+  height: auto;
 }
 
 .profile-section{
@@ -43,7 +45,8 @@ body{
   padding:10px;
 }
 
-.new-service-section{
+.new-service-section,
+.new-pet-section{
   grid-area: b;
   margin: 20px auto;
   height: auto;
@@ -53,7 +56,8 @@ body{
   padding:10px;
 }
 
-.upcoming-section{
+.upcoming-section,
+.my-pets-section{
   grid-area: c;
   margin: 20px auto;
   height: auto;
@@ -63,7 +67,8 @@ body{
   padding:10px;
 }
 
-textarea.profile{
+textarea.profile,
+textarea.newPet{
   resize: none;
 }
 /*==============================Profile Styling==========================================
@@ -102,14 +107,17 @@ textarea.profile{
 /*============================New Service Styling========================================
 =======================================================================================*/
 
-.new-service{
+.new-service,
+.new-pet{
   padding: 12px 20px 0px 20px;
 }
 
-.header-new-service{
+.header-new-service,
+.header-new-pet{
   font-family:'Ubuntu-Bold';
   text-align: center;
 }
+
 .btn-list{
   width: 100%;
   height: 60px;
@@ -151,6 +159,12 @@ textarea.profile{
   padding: 5px;
   border-radius: 5px;
   text-align: center;
+  transition: 1s;
+}
+
+.upcoming-result:hover{
+  background-color: #938dff;
+  transition: 1s;
 }
 
 .upcoming-no-result{
@@ -184,5 +198,70 @@ textarea.profile{
 }
 
 
-/*==============================Request Styling==========================================
+/*===========================My Pets Styling============================================
 =======================================================================================*/
+.myPet{
+  padding: 25px 20px 0px 20px;
+}
+
+.header-myPet{
+  font-family:'Ubuntu-Bold';
+  text-align: center;
+}
+
+.myPet-result{
+  color: black;
+  font-family: Quicksand;
+  background-color: #f2eded;
+  padding: 5px;
+  border-radius: 20px;
+  text-align: center;
+  transition: 1s;
+  margin: 10px auto;
+}
+
+.myPet-result span{
+    font-family: Ubuntu-Bold;
+    font-size: 20px;
+}
+
+.myPet-result img{
+  height: 100px;
+  width: 100px;
+  border-radius: 20%
+}
+
+.myPet-result:hover{
+  background-color: #b3acab;
+  transition: 1s;
+}
+
+.upcoming-no-result{
+  color:black;
+  font-family: Quicksand;
+  background-color: #f0ebff;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.btn-request{
+  margin-top: 50px;
+  width: 100%;
+  background-color: #ff903b;
+  color:white;
+  transition: 1s;
+  height: 50px;
+  padding: 10px;
+  text-decoration: none;
+  border-style: none;
+  border-radius: 5px;
+  font-family: Ubuntu-Regular;
+}
+
+.btn-request:hover{
+  cursor: pointer;
+  background-color: #615fc4;
+  transition: 1s;
+}

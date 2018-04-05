@@ -1,8 +1,19 @@
 <?php
   session_start();
   include('connection.php');
+  if($_SESSION['alert-message-service-fail']){
+    echo "<script>alert('Not able to add service. End date cannot preceed start date. Please try again')</script>";
+    $_SESSION['alert-message-service-fail'] = false;
+  }
+  if($_SESSION['alert-message-profile-pass']){
+    echo "<script>alert('Successfully updated your profile!')</script>";
+    $_SESSION['alert-message-profile-pass'] = false;
+  }
+  if($_SESSION['alert-message-profile-fail']){
+    echo "<script>alert('Error while updating your profile. Please try again.')</script>";
+    $_SESSION['alert-message-profile-fail'] = false;
+  }
 ?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -15,6 +26,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
     <!--===============================================================================================-->
+    <!-- Include Required Prerequisites -->
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+
+    <script type="text/javascript" src="http://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   </head>

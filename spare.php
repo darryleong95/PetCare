@@ -1,66 +1,292 @@
-<div class="content-wrapper">
-  <div class="sidebar">
-    <?php include 'sidebar_ps.php' ?>
-  </div>
-  <div class="profile-content">
-    <div class="form-area">
-      <div class="header">
-        <h2>Profile Page</h2>
-      </div>
-      <form name="updateProfile_form" class="suForm form-horizontal form_font" method="POST" action="updateProfile_ps.php" onsubmit="return Validate()">
-        <div class="form-group">
-          <label class="control-label col-xs-3" for="firstName">First name:</label>
-          <div class="col-xs-8" id="firstName_div">
-            <input class="form-control" id="firstName" type="text" name="firstName" value="<?= $_SESSION['firstName'] ?>" />
-            <div id="firstName_err"></div>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label col-xs-3" for="lastName">Last name:</label>
-          <div class="col-xs-8" id="lastName_div">
-            <input class="form-control" id="lastName" type="text" name="lastName" value="<?= $_SESSION['lastName'] ?>" />
-            <div id="lastName_err"></div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label col-xs-3" for="email">Email:</label>
-          <div class="col-xs-8" id="email_div">
-            <input class="form-control" id="email" type="text" name="email" value="<?= $_SESSION['email'] ?>" disabled/>
-            <div id="email_err"></div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label col-xs-3" for="password">Change Password:</label>
-          <div class="col-xs-8" id="password_div">
-            <input class="form-control" id="password" type="text" name="password" value="<?= $_SESSION['password'] ?>"/>
-            <div id="password_err"></div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label col-xs-3" for="address">Change Address:</label>
-          <div class="col-xs-8" id="address_div">
-            <input class="form-control" id="address" type="text" name="address" value="<?= $_SESSION['address'] ?>" />
-            <div id="address_err"></div>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label col-xs-3" for="additionalInfo">Additional Information:</label>
-          <div class="col-xs-8" id="additionalInfo_div">
-            <textarea class="form-control" rows = "3" id="additionalInfo" name="additionalInfo"><?= $_SESSION['additionalInfo'] ?></textarea>
-          </div>
-        </div>
-
-        <div class="sign_up_submit">
-          <center>
-            <input type="submit" name="submit" value="Update Profile" class="btn"/>
-          </center>
-        </div>
-
-      </form>
-    </div>
-  </div>
-</div>
+if($execute){
+ while($row = pg_fetch_array($execute)){
+   if($keyCounter == 1){
+     if(strpos($row['servicetitle'], $keyword) !== false){
+       //Select this result
+       if($priceCounter == 1){
+         if($price >= $row['price']){
+           if($startCounter == 1){
+             $resultStartDate = $row['servicestart'];
+             $resultEnd = $row['serviceend'];
+             if(strtotime($startDate) >= strtotime($resultStartDate) && strtotime($startDate) <= strtotime($resultEnd)){
+               if($endCounter == 1){
+                 $resultEndDate = $row['serviceend'];
+                 if(strtotime($endDate) <= strtotime($resultEndDate)){
+                   //Display final results
+                   echo "<div class='service-blocks'>";
+                   echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+                   echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+                   echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+                   echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+                   echo "</div>";
+                 }
+                 else{
+                   //No Results
+                   $_SESSION['no-results-1'] = true;
+                   header("Location:search.php");
+                 }
+               }
+               else{
+                 //Display final results
+                 echo "<div class='service-blocks'>";
+                 echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+                 echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+                 echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+                 echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+                 echo "</div>";
+               }
+             }
+             else{
+               $_SESSION['no-results-2'] = true;
+               header("Location:search.php");
+             }
+           }
+           else{
+             if($endCounter == 1){
+               $resultEndDate = $row['serviceend'];
+               $resultStartDate = $row['servicestart'];
+               if(strtotime($endDate) >= strtotime($resultStartDate) && strtotime($endDate) <= strtotime($resultEndDate)){
+                 //Display final results
+                 echo "<div class='service-blocks'>";
+                 echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+                 echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+                 echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+                 echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+                 echo "</div>";
+               }
+               else{
+                 $_SESSION['no-results-3'] = true;
+                 header("Location:search.php");
+               }
+             }
+             else{
+               //Display final results
+               echo "<div class='service-blocks'>";
+               echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+               echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+               echo "</div>";
+             }
+           }
+         }
+         else{
+           $_SESSION['no-results-4'] = true;
+           header("Location:search.php");
+         }
+       }
+       else{
+         if($startCounter == 1){
+           $resultStartDate = $row['servicestart'];
+           $resultEnd = $row['serviceend'];
+           if(strtotime($startDate) >= strtotime($resultStartDate) && strtotime($startDate) <= strtotime($resultEnd)){
+             if($endCounter == 1){
+               $resultEndDate = $row['serviceend'];
+               if(strtotime($endDate) <= strtotime($resultEndDate)){
+                 //Display final results
+                 echo "<div class='service-blocks'>";
+                 echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+                 echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+                 echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+                 echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+                 echo "</div>";
+               }
+               else{
+                 //No Results
+                 $_SESSION['no-results-5'] = true;
+                 header("Location:search.php");
+               }
+             }
+             else{
+               //Display final results
+               echo "<div class='service-blocks'>";
+               echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+               echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+               echo "</div>";
+             }
+           }
+           else{
+             $_SESSION['no-results-6'] = true;
+             header("Location:search.php");
+           }
+         }
+         else{
+           if($endCounter == 1){
+             $resultEndDate = $row['serviceend'];
+             $resultStartDate = $row['servicestart'];
+             if(strtotime($endDate) >= strtotime($resultStartDate) && strtotime($endDate) <= strtotime($resultEndDate)){
+               //Display final results
+               echo "<div class='service-blocks'>";
+               echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+               echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+               echo "</div>";
+             }
+             else{
+               $_SESSION['no-results-7'] = true;
+               header("Location:search.php");
+             }
+           }
+           else{
+             //Display final results
+             echo "<div class='service-blocks'>";
+             echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+             echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+             echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+             echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+             echo "</div>";
+           }
+         }
+       }
+     }
+     else{
+       $_SESSION['no-results-8'] = true;
+       header("Location:search.php");
+     }
+   }
+   else{
+     //MADE IT TO THE OTHER SIDE OF THE TREE
+     if($priceCounter == 1){
+       if($price >= $row['price']){
+         if($startCounter == 1){
+           $resultStartDate = $row['servicestart'];
+           $resultEnd = $row['serviceend'];
+           if(strtotime($startDate) >= strtotime($resultStartDate) && strtotime($startDate) <= strtotime($resultEnd)){
+             if($endCounter == 1){
+               $resultEndDate = $row['serviceend'];
+               if(strtotime($endDate) <= strtotime($resultEndDate)){
+                 //Display final results
+                 echo "<div class='service-blocks'>";
+                 echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+                 echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+                 echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+                 echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+                 echo "</div>";
+               }
+               else{
+                 //No Results
+                 $_SESSION['no-results-9'] = true;
+                 header("Location:search.php");
+               }
+             }
+             else{
+               //Display final results
+               echo "<div class='service-blocks'>";
+               echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+               echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+               echo "</div>";
+             }
+           }
+           else{
+             $_SESSION['no-results-10'] = true;
+             header("Location:search.php");
+           }
+         }
+         else{
+           if($endCounter == 1){
+             $resultEndDate = $row['serviceend'];
+             $resultStartDate = $row['servicestart'];
+             if(strtotime($endDate) >= strtotime($resultStartDate) && strtotime($endDate) <= strtotime($resultEndDate)){
+               //Display final results
+               echo "<div class='service-blocks'>";
+               echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+               echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+               echo "</div>";
+             }
+             else{
+               $_SESSION['no-results-11'] = true;
+               header("Location:search.php");
+             }
+           }
+           else{
+             //Display final results
+             echo "<div class='service-blocks'>";
+             echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+             echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+             echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+             echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+             echo "</div>";
+           }
+         }
+       }
+       else{
+         $_SESSION['no-results-12'] = true;
+         header("Location:search.php");
+       }
+     }
+     else{
+       if($startCounter == 1){
+         $resultStartDate = $row['servicestart'];
+         $resultEnd = $row['serviceend'];
+         if(strtotime($startDate) >= strtotime($resultStartDate) && strtotime($startDate) <= strtotime($resultEnd)){
+           if($endCounter == 1){
+             $resultEndDate = $row['serviceend'];
+             if(strtotime($endDate) <= strtotime($resultEndDate)){
+               //Display final results
+               echo "<div class='service-blocks'>";
+               echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+               echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+               echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+               echo "</div>";
+             }
+             else{
+               //No Results
+               $_SESSION['no-results-13'] = true;
+               header("Location:search.php");
+             }
+           }
+           else{
+             //Display final results
+             echo "<div class='service-blocks'>";
+             echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+             echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+             echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+             echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+             echo "</div>";
+           }
+         }
+         else{
+           $_SESSION['no-results-14'] = true;
+           header("Location:search.php");
+         }
+       }
+       else{
+         if($endCounter == 1){
+           $resultEndDate = $row['serviceend'];
+           $resultStartDate = $row['servicestart'];
+           if(strtotime($endDate) >= strtotime($resultStartDate) && strtotime($endDate) <= strtotime($resultEndDate)){
+             //Display final results
+             echo "<div class='service-blocks'>";
+             echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+             echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+             echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+             echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+             echo "</div>";
+           }
+           else{
+             $_SESSION['no-results-15'] = true;
+             header("Location:search.php");
+           }
+         }
+         else{
+           //Display final results
+           echo "<div class='service-blocks'>";
+           echo "<span class='title'>" . $row['servicetitle'] . "</span>";
+           echo "<div class='row'><div class='col-sm-5'>Start date:</div><div class='col-sm-7'>" . $row['servicestart'] . "</div></div>";
+           echo "<div class='row'><div class='col-sm-5'>End date:</div><div class='col-sm-7'>" . $row['serviceend'] . "</div></div>";
+           echo "<div class='row'><div class='col-sm-5'>Service ID:</div><div class='col-sm-7'>" . $row['serviceid'] . "</div></div>";
+           echo "</div>";
+         }
+       }
+     }
+   }
+ }
+}

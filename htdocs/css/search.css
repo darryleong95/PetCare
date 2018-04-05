@@ -1,0 +1,147 @@
+/*==============================Imported Fonts==========================================
+=======================================================================================*/
+@font-face {
+  font-family: Ubuntu-Regular;
+  src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu-Bold;
+  src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
+}
+/*==============================General Styling==========================================
+=======================================================================================*/
+html,
+body{
+  height: 100%;
+  width: 100%;
+}
+
+.inner-container{
+  height: 100%;
+  width: 100%;
+}
+
+.inner-container.search{
+  background: url("../img/playingdogs2.jpg");
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+}
+
+.content-wrapper{
+  display: table;
+  position: absolute;
+  height: 80%;
+  width: 100%;
+}
+
+.searchbar-outer,
+.apply-outer{
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.searchbar-inner,
+.apply-inner{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.searchbar-inner{
+  width: 80%;
+  padding: 50px 70px;
+  background-color: rgb(0,0,0,0.3);
+  border-radius: 10px;
+}
+
+.apply-inner{
+  width: 50%;
+}
+
+.grid{
+  display: grid;
+  grid-template: "a a b c d e";
+  grid-gap: 10px;
+}
+
+.title{
+  grid-area: a;
+}
+
+.price{
+  grid-area: b;
+}
+
+.start{
+  grid-area: c;
+}
+
+.end{
+  grid-area: d;
+}
+
+.search_submit{
+  grid-area: e;
+}
+
+label{
+  font-family: Ubuntu-Regular;
+  color:white;
+  font-size: 20px;
+}
+
+label.apply{
+  color: black;
+}
+
+input.form-control::-webkit-input-placeholder {
+  font-weight: 400;
+  font-size: 17px;
+  font-family: Ubuntu-Regular;
+  background-color: inherit;
+}
+
+input.form-control{
+  background-color: #F5F5F5;
+  border:none;
+  text-decoration: none;
+  height: 50px;
+}
+
+input.form-control:focus{
+    box-shadow: 0 0 5px #3584eb;
+    border: 1px solid #3584eb;
+    background-color:#e8e6e4;
+}
+
+.btn-submit{
+  background-color: #827ffe;
+  color:white;
+  font-family: Ubuntu-Regular;
+  padding: 0 20px;
+  width: 100%;
+  height: 62px;
+  -webkit-transition: all 0.7s;
+  -o-transition: all 0.7s;
+  -moz-transition: all 0.7s;
+  transition: all 0.7s;
+  border-style: none;
+  border-radius: 10px;
+}
+
+.btn-submit:hover{
+  background-color: #403866;
+  cursor: pointer
+}
+
+textarea.apply{
+  resize: none;
+}
+
+.btn.apply{
+  width: 100%;
+  height: 70px;
+  font-family: Ubuntu-Regular;
+  font-size: 17px;
+}

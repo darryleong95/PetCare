@@ -38,7 +38,7 @@
         <div class="inner">
           <p class="desc">Find a nice home for your pet while you're away, they deserve it.</p>
           <br>
-          <a class="btn" href="searchPage.php" role="button"><div class="text">Browse Available Services</div></a>
+          <a class="btn" href="search.php" role="button"><div class="text">Browse Available Services</div></a>
         </div>
       </div>
     </div>

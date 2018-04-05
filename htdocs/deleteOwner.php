@@ -15,7 +15,7 @@
     else{
       echo "<script>alert('Problem with removing Owner: $id, please try again.')</script>";
     }
-    include('allOwners.php');
+    header('Location:allOwners.php');
 
   }
 

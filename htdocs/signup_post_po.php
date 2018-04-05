@@ -31,19 +31,19 @@
         $_SESSION["password"]  = $_POST[password];
         $_SESSION["userType"]  = "po";
 
-        include("profile_po.php");
+        header("Location:profile_po.php");
       }
       else{
         session_destroy();
         echo "<script>alert('Unable to register, please try again $newId')</script>";
-        include("signup_po.php");; /* Redirect browser */
+        header("Location:signup_po.php");; /* Redirect browser */
         exit();
       }
     }
     else{
       session_destroy();
       echo "<script>alert('Email already in use, please log in')</script>";
-      include("login_po.php");; /* Redirect browser */
+      header("Location:login_po.php");; /* Redirect browser */
       exit();
     }
   }

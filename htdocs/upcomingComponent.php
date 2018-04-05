@@ -22,15 +22,14 @@
         $counter        = 0;
         while($row2 = pg_fetch_array($result1)){
           if($counter<3 && $currentDate < $startDateD){
-            echo "<div class='upcoming-result'><p>Pet owner: ", $row2['firstname'], " ", $row2['lastname'], "<br>";
+            echo "<div class='upcoming-result'><p>Pet owner: <strong>", $row2['firstname'], " ", $row2['lastname'], "</strong><br>";
             echo "Start date: ", $startDate, "<br>"; // works just fine
             echo "End date  : ", $endDate, "<br>"; // works just fine
-            echo "Bid               : ", $bid, "<br>"; // works just fine
+            echo "Bid : ", $bid; // works just fine
             if(isNotEmpty($additionalInfo)){
-              echo "Additional Information: ", $additionalInfo, "<br>";
+              echo "<br> Additional Information: ", $additionalInfo;
             }
             echo "</p></div>";
-            echo nl2br("<br><br>") ;
             $counter = $counter + 1;
             $counter2 = $counter2 +1;
           }

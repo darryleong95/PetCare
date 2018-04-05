@@ -1,5 +1,116 @@
-.row{
-    min-width:960px;
-    margin-left:auto;
-    margin-right:auto;
+/*==============================Imported Fonts==========================================
+=======================================================================================*/
+@font-face {
+  font-family: Ubuntu-Regular;
+  src: url('../fonts/ubuntu/Ubuntu-Regular.ttf');
+}
+
+@font-face {
+  font-family: Ubuntu-Bold;
+  src: url('../fonts/ubuntu/Ubuntu-Bold.ttf');
+}
+/*==============================General Styling==========================================
+=======================================================================================*/
+html,
+body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+.inner-container{
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+
+.overall-wrapper{
+  display: grid;
+  grid-template: "a a a a b"
+                 "a a a a b"
+                 "a a a a b";
+}
+
+.content-wrapper{
+  grid-area: a;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-auto-columns: auto;
+  grid-area: a;
+  grid-gap: 20px 20px;
+  margin: 10px;
+}
+
+.select-service{
+  grid-area: b;
+}
+/*==============================Search results Styling===================================
+=======================================================================================*/
+.content-wrapper>div{
+  background-color: #FFBFA0;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/*============================== Results Styling===================================
+=======================================================================================*/
+.header-results{
+  text-align: center;
+  font-family: Ubuntu-Bold;
+  color:white;
+  padding-top: 30px;
+}
+
+span.title{
+  font-family: Ubuntu-Bold;
+  font-size: 20px;
+}
+
+.service-blocks{
+  font-family: Ubuntu-Regular;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+}
+
+.service-blocks .row{
+  width 80%;
+}
+
+.service-blocks .row .col-sm-7{
+  text-align: left;
+}
+
+.service-blocks .row .col-sm-5{
+  text-align: right;
+}
+
+/*==============================Apply button Styling===================================
+=======================================================================================*/
+.select-service{
+  margin: 0 auto;
+  padding: 20px;
+  background-color: rgb(61,61,61,0.9);
+  border-radius: 10px;
+  color: white;
+  font-family: Ubuntu-Regular;
+}
+
+.btn-apply{
+  height: 60px;
+  width: 100%;
+  border-style: none;
+  border-radius: 10px;
+  background-color: rgb(252,117,250,0.4);
+  transition: 1s;
+  font-family: Ubuntu-Regular;
+  font-size: 15px;
+  color: white;
+}
+
+.btn-apply:hover{
+  cursor: pointer;
+  background-color: rgb(178,145,250,1);
+  transition: 1s;
 }

@@ -30,19 +30,19 @@
         $_SESSION["password"]  = $_POST[password];
         $_SESSION["userType"]  = "ps";
 
-        include("profile_ps.php");
+        header("Location:profile_ps.php");
       }
       else{
         session_destroy();
         echo "<script>alert('Unable to register, please try again')</script>";
-        include("signup_ps.php");; /* Redirect browser */
+        header("Location:signup_ps.php");; /* Redirect browser */
         exit();
       }
     }
     else{
       session_destroy();
       echo "<script>alert('Email already in use, please log in')</script>";
-      include("login_ps.php"); /* Redirect browser */
+      header("Location:login_ps.php"); /* Redirect browser */
       exit();
     }
   }

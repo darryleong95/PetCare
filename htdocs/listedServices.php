@@ -1,30 +1,46 @@
 <?php
   session_start();
   include('connection.php');
+  if($_SESSION['alert-message-delete-service-pass']){
+    echo "<script>alert('Succesfully deleted entry!')</script>";
+    $_SESSION['alert-message-delete-service-pass'] = false;
+  }
+  if($_SESSION['alert-message-delete-service-fail']){
+    echo "<script>alert('Service ID entered does not exist')</script>";
+    $_SESSION['alert-message-delete-service-fail'] = false;
+  }
+  if($_SESSION['alert-message-delete-service-fail-2']){
+    echo "<script>alert('Service ID entered does not exist: Error deleting')</script>";
+    $_SESSION['alert-message-delete-service-fail-2'] = false;
+  }
+  if($_SESSION["alert-message-service-pass"]) {
+    echo "<script>alert('Succesfully added a Service!')</script>";
+    $_SESSION['alert-message-service-pass'] = false;
+  }
 ?>
 <!DOCTYPE html>
 <html>
-<header>
-  <title>Registered Pets</title>
+<head>
+  <title>Listed Services</title>
 
   <meta charset="utf-8">
 
-  <link rel="stylesheet" href="css/service-request.css">
+  <link rel="stylesheet" href="css/service-request-pet.css">
   <link rel="stylesheet" href="css/navbar.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand" />
   <!--===============================================================================================-->
-  <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-</header>
+</head>
 <body>
   <div class="inner-container">
     <div class="nav-wrapper">
       <?php include('navbar.php') ?>
     </div>
     <div class="header-service">
-      <h2>Services</h2>
+      <h2><i class="fas fa-cogs"></i> Services</h2>
     </div>
     <div class="overall-wrapper">
       <div class="content-wrapper">
