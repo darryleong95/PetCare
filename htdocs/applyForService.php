@@ -5,9 +5,17 @@
     echo "<script>alert('Unable to make a request, please try again.')</script>";
     $_SESSION['made-request-fail'] = false;
   }
-  if($_SESSION['made-request-pass']){
-    echo "<script>alert('Total number of pets you have exceeds sitter's capacity.')</script>";
-    $_SESSION['made-request-pass'] = false;
+  if($_SESSION['made-request-fails']){
+    echo "<script>alert('Failing here ')</script>";
+    $_SESSION['made-request-fails'] = false;
+  }
+  if($_SESSION['already-accepted']){
+    echo "<script>alert('Unable to make request: There has already been a request you made within specified dates which has already been accepted.')</script>";
+    $_SESSION['already-accepted'] = false;
+  }
+  if($_SESSION['too-many']){
+    echo "<script>alert('Unable to make request: Number of pets exceeds pet sitters capacity.')</script>";
+    $_SESSION['too-many'] = false;
   }
 ?>
 <!DOCTYPE html>

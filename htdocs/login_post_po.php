@@ -9,8 +9,6 @@
       $_SESSION["email"]          = $email;
       $_SESSION["password"]       = $password;
       $_SESSION["userType"]       = "ad";
-
-      echo "<script>alert('Welcome Mr. Admin')</script>";
       header('Location:adminPage.php');
     }
     else{

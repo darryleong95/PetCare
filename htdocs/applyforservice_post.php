@@ -18,22 +18,40 @@
     else{
       $reqId = 0;
     }
-    $numPets = "SELECT * FROM tooManyPets('$reqId','$startDate','$endDate','$additionalInfo','$petownerid','$serviceid','$bid');";
-    $execute = pg_query($db,$numPets);
-
-    if($execute){
-      if(pg_fetch_result($execute,0) == 't'){
-        //too many, didnt go through
-        $_SESSION['made-request-fail'] = true;
-        header('Location:applyForService.php');
+    $d1 = new DateTime($startDate);
+    $d2 = new DateTime($endDate);
+    $d1 = $d1->format('Y-m-d');
+    $d2 = $d2->format('Y-m-d');
+    $canApply = "SELECT * FROM canApply('$petownerid','$d1','$d2');";
+    $canApplyQ = pg_query($db,$canApply);
+    if($canApplyQ){ 
+      if(pg_fetch_result($canApplyQ,0) == 't'){
+        $numPets = "SELECT * FROM tooManyPets('$reqId','$startDate','$endDate','$additionalInfo','$petownerid','$serviceid','$bid');";
+        $execute = pg_query($db,$numPets);
+    
+        if($execute){
+          if(pg_fetch_result($execute,0) == 't'){
+            //too many, didnt go through
+            $_SESSION['too-many'] = true;
+            header('Location:applyForService.php');
+          }
+          else{
+            $_SESSION['made-request-pass'] = true;
+            header('Location:madeRequest.php');
+          }
+        }
+        else{
+          $_SESSION['made-request-fail'] = true;
+          header('Location:applyForService.php');
+        }
       }
       else{
-        $_SESSION['made-request-pass'] = true;
-        header('Location:madeRequest.php');
+        $_SESSION['already-accepted'] = true;
+        header('Location:applyForService.php');
       }
     }
     else{
-      $_SESSION['made-request-fail'] = true;
+      $_SESSION['made-request-fails'] = true;
       header('Location:applyForService.php');
     }
   }

@@ -9,9 +9,7 @@
       $_SESSION["email"]          = $email;
       $_SESSION["password"]       = $password;
       $_SESSION["userType"]       = "ad";
-
-      echo "<script>alert('Welcome Mr. Admin')</script>";
-      include('adminPage.php');
+      header('Location:adminPage.php');
     }
     else{
       $result = pg_query($db, "SELECT * FROM petsitter WHERE email = '$email' AND password = '$password';");
