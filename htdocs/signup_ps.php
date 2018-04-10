@@ -1,6 +1,11 @@
 <?php
   session_start();
   include('connection.php');
+  if($_SESSION['fail-signup']){
+    echo "<script>alert('There was an error signing up, please try again!')</script>";
+    $_SESSION['fail-signup'] = false;
+    session_destroy();
+  }
 ?>
 <!DOCTYPE html>
 <html>

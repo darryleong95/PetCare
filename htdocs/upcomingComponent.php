@@ -7,7 +7,7 @@
     <?php
       session_start();
       $id = $_SESSION["id"];
-      $result = pg_query($db, "SELECT * FROM request WHERE petsitterid = '$id' AND status = 'accepted'");
+      $result = pg_query($db, "SELECT * FROM request WHERE petsitterid = '$id' AND status = 'ACCEPTED'");
       $currentDate = date("Y-m-d");
       $counter2       = 0;
       while ($row = pg_fetch_array($result)) {

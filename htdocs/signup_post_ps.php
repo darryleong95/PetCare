@@ -16,9 +16,13 @@
       else{
         $newId = 0;
       }
+      $firstName =  $_POST[firstName];
+      $lastName =  $_POST[lastName];
+      $email = $_POST[email];
+      $password = $_POST[password];
+      $address =  $_POST[address];
 
-      $execute = pg_query($db, "INSERT INTO petsitter(petsitterid,firstname,lastname,email,password,address)
-      VALUES('$newId','$_POST[firstName]','$_POST[lastName]','$_POST[email]','$_POST[password]','$_POST[address]')");
+      $execute = pg_query($db, "INSERT INTO petsitter(petsitterid,firstname,lastname,email,password,address) VALUES('$newId','$firstName','$lastName','$email','$password','$address');");
 
       if($execute){
         //redirect to profile page
@@ -29,21 +33,17 @@
         $_SESSION["email"]     = $_POST[email];
         $_SESSION["password"]  = $_POST[password];
         $_SESSION["userType"]  = "ps";
-
         header("Location:profile_ps.php");
       }
       else{
-        session_destroy();
-        echo "<script>alert('Unable to register, please try again')</script>";
-        header("Location:signup_ps.php");; /* Redirect browser */
-        exit();
+        $_SESSION["fail-signup"] = true;
+        header("Location:signup_ps.php"); /* Redirect browser */
       }
     }
     else{
       session_destroy();
-      echo "<script>alert('Email already in use, please log in')</script>";
+      $_SESSION["already-signup"] = true;
       header("Location:login_ps.php"); /* Redirect browser */
-      exit();
     }
   }
  ?>

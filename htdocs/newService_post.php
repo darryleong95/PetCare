@@ -21,18 +21,31 @@
       $max = $_POST[max];
       $price = $_POST[price];
 
-      $q =  "INSERT INTO service(serviceId,serviceTitle,serviceStart,serviceEnd,max,price,petsitterid) VALUES('$numRow','$title','$startDate','$endDate','$max','$price','$id');";
+      $q =  "INSERT INTO service(serviceId,serviceTitle,serviceStart,serviceEnd,price,petsitterid) VALUES('$numRow','$title','$startDate','$endDate','$price','$id');";
 
       $execute = pg_query($db,$q);
 
       if($execute){
+
+        //GET LATEST PROVIDES Id
+        $latestProvides = "SELECT * FROM provides p1 WHERE providesid >= all(SELECT providesid FROM provides p2)";
+        $latestProvidesResults = pg_query($db,$latestProvides);
+        if(pg_num_rows($latestProvidesResults) != 0){
+          while($row = pg_fetch_array($latestProvidesResults)){
+            $providesid = $row['providesid'] + 1;
+          }
+        }
+        else{
+          $providesid = 0;
+        }
 
         $d1 = new DateTime($startDate);
         $d2 = new DateTime($endDate);
 
         while($d1->format('Y-m-d') <= $d2->format('Y-m-d')){
           $insertDate = $d1->format('Y-m-d');
-          $q1 = "INSERT INTO provides(date_avail,petsitterid,serviceid) VALUES('$insertDate','$id','$numRow');";
+          $q1 = "INSERT INTO provides(providesid,date_avail,petsitterid,serviceid,max) VALUES('$providesid','$insertDate','$id','$numRow','$max');";
+          $providesid++;
           $execute1 = pg_query($db,$q1);
           if($execute1){
             $d1->modify('+1 day');

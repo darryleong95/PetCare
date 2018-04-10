@@ -1,6 +1,10 @@
 <?php
   session_start();
   include('connection.php');
+  if($_SESSION['already-signup']){
+    echo "<script>alert('You already have an account! Please sign in here.')</script>";
+    $_SESSION['already-signup'] = false;
+  }
 ?>
 <!DOCTYPE html>
 <html>

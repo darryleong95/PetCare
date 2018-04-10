@@ -18,18 +18,18 @@
     else{
       $reqId = 0;
     }
-    $numPets = "SELECT tooManyPets('$reqId','$startDate','$endDate','$additionalInfo','$petownerid','$serviceid','$bid');";
+    $numPets = "SELECT * FROM tooManyPets('$reqId','$startDate','$endDate','$additionalInfo','$petownerid','$serviceid','$bid');";
     $execute = pg_query($db,$numPets);
 
     if($execute){
       if(pg_fetch_result($execute,0) == 't'){
         //too many, didnt go through
-        $_SESSION['made-request-pass'] = true;
-        header('Location:applyForService.php'); //re route to correct place
+        $_SESSION['made-request-fail'] = true;
+        header('Location:applyForService.php');
       }
       else{
         $_SESSION['made-request-pass'] = true;
-        header('Location:madeRequest.php'); //re route to correct place
+        header('Location:madeRequest.php');
       }
     }
     else{

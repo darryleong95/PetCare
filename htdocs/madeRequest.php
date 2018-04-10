@@ -68,7 +68,7 @@
             <input class="form-control" size=10 type='text' id='id' name='id' placeholder="Input ID"/>
           </div>
           <center>
-            <input type='submit' name='submit' value='Reject Request' class='btn-accept-request'/>
+            <input type='submit' name='submit' value='Delete Request' class='btn-accept-request'/>
           </center>
         </form>
       </div>
