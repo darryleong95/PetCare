@@ -21,7 +21,7 @@
       $max = $_POST[max];
       $price = $_POST[price];
 
-      $q =  "INSERT INTO service(serviceId,serviceTitle,serviceStart,serviceEnd,price,petsitterid) VALUES('$numRow','$title','$startDate','$endDate','$price','$id');";
+      $q =  "INSERT INTO service(serviceId,serviceTitle,serviceStart,serviceEnd,price,petsitterid,max) VALUES('$numRow','$title','$startDate','$endDate','$price','$id','$max');";
 
       $execute = pg_query($db,$q);
 
@@ -44,7 +44,7 @@
 
         while($d1->format('Y-m-d') <= $d2->format('Y-m-d')){
           $insertDate = $d1->format('Y-m-d');
-          $q1 = "INSERT INTO provides(providesid,date_avail,petsitterid,serviceid,max) VALUES('$providesid','$insertDate','$id','$numRow','$max');";
+          $q1 = "INSERT INTO provides(providesid,date_avail,petsitterid,serviceid) VALUES('$providesid','$insertDate','$id','$numRow');";
           $providesid++;
           $execute1 = pg_query($db,$q1);
           if($execute1){

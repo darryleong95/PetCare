@@ -17,6 +17,10 @@
     echo "<script>alert('Succesfully added a Service!')</script>";
     $_SESSION['alert-message-service-pass'] = false;
   }
+  if($_SESSION["already-accepted"]){
+    echo "<script>alert('Unable to delete service. You have already accepted a service.')</script>";
+    $_SESSION["already-accepted"] = false;
+  }
 ?>
 <!DOCTYPE html>
 <html>

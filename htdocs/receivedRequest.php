@@ -6,7 +6,7 @@
     $_SESSION['pass-request'] = false;
   }
   if($_SESSION['fail-request']){
-    echo "<script>alert('Error while accepting request. Please make sure RequestId is Valid/ Number of pets no exceeded')</script>";
+    echo "<script>alert('Error while accepting request. Please make sure RequestId is Valid/ Number of pets is not exceeded')</script>";
     $_SESSION['fail-request'] = false;
   }
   if($_SESSION['status-accepted']){

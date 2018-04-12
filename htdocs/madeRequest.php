@@ -10,7 +10,7 @@
     $_SESSION['delete-pass'] = false;
   }
   if($_SESSION['delete-fail']){
-    echo "<script>alert('Please ensure RequestId is Valid/ Request status: REJECT')</script>";
+    echo "<script>alert('Please ensure RequestId is Valid/ Request status: REJECT/ PENDING')</script>";
     $_SESSION['delete-fail'] = false;
   }
   if($_SESSION['delete-error']){

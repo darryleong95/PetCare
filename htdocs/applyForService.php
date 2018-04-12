@@ -138,7 +138,9 @@
                                   ";
                         }
                         else if(pg_num_rows($results) != 0){
+                          $counter = 0;
                           while($row = pg_fetch_array($results)){
+                            $counter++;
                             $start = $row['requeststart'];
                             $end   = $row['requestend'];
                             if($row['petownerid'] == $_SESSION["id"]){
@@ -151,16 +153,19 @@
                                   </center>
                                 </div>
                                 ";
+                              break;
                             }
                             else{
                               echo "<div class='form-group alert alert-warning'>
                                 <center><strong>*Please note that the sitter has already accepted a booking from $start to $end*</strong><center>
-                                </div>
-                                <div class='form-group sign_up_submit'>
-                                  <center>
-                                    <input type='submit' name='submit' value='Register my Pet!' class='btn apply'/>
-                                  </center>
                                 </div>";
+                                if($counter == pg_num_rows($results)){
+                                  echo "<div class='form-group sign_up_submit'>
+                                          <center>
+                                            <input type='submit' name='submit' value='Register my Pet!' class='btn apply'/>
+                                          </center>
+                                        </div>";
+                                }
                             }
                           }
                         }
